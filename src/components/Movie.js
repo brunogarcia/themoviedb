@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Row, Col, Media } from 'react-bootstrap';
 import CONSTANTS from '../constants';
 import Image from './Image';
+import Recommendation from './Recommendation';
 import './Movie.css';
 
 const MAX_OVERVIEW_WORDS = 40;
@@ -83,6 +84,8 @@ function Movie(props) {
                   &nbsp;
                   More info
                 </Link>
+
+                <Recommendation vote={voteAverageNormalized}/>
               </div>
             </div>
           </Col>

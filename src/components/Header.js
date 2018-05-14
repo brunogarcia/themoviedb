@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import './Header.css';
 import logo from '../logo.svg';
+import Icon from './Icon';
 
 const Header = () => {
   return (
@@ -14,9 +15,7 @@ const Header = () => {
         </div>
         <p className="Header-nav navbar-text navbar-right">
           <Link to="/" className="btn btn-success navbar-btn">
-            <span className="glyphicon glyphicon-star" aria-hidden="true"></span>
-            &nbsp;
-            Popular movies
+            <Icon name={'star'}/> Popular movies
           </Link>
         </p>
       </div>

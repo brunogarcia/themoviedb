@@ -87,6 +87,18 @@ exports[`renders correctly 1`] = `
               />
                 More info
             </a>
+            <div
+              className="Recommendation-main"
+            >
+              <span
+                aria-hidden="true"
+                className="glyphicon glyphicon-thumbs-up"
+              />
+               
+              <small>
+                Editor choice
+              </small>
+            </div>
           </div>
         </div>
       </div>
