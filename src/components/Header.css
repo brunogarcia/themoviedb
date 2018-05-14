@@ -1,0 +1,14 @@
+.Header-main {
+    background-color: #222;
+    height: 80px;
+    padding: 10px;
+    color: white;
+}
+
+.Header-logo {
+    height: 60px;
+}
+
+.Header-nav {
+    margin-top: 10px;
+}
