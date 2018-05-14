@@ -16,7 +16,12 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    this._isMounted = true;
     this.getPopularMovies();
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   getPopularMovies() {
@@ -29,15 +34,19 @@ class Home extends Component {
       }
     })
     .then(data => {
-      this.setState({
-        movies: data.results,
-        loading: false,
-      });
+      if (this._isMounted) {
+        this.setState({
+          movies: data.results,
+          loading: false,
+        });
+      }
     })
     .catch(error => {
-      this.setState({
-        error: true
-      });
+      if (this._isMounted) {
+        this.setState({
+          error: true
+        });
+      }
     });
   }
 

@@ -17,8 +17,13 @@ class Results extends Component {
   }
 
   componentDidMount() {
+    this._isMounted = true;
     const query = this.props.match.params.query;
     this.searchMovies(query);
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -36,15 +41,19 @@ class Results extends Component {
       }
     })
     .then(data => {
-      this.setState({
-        movies: data.results,
-        loading: false,
-      });
+      if (this._isMounted) {
+        this.setState({
+          movies: data.results,
+          loading: false,
+        });
+      }
     })
     .catch(error => {
-      this.setState({
-        error: true
-      });
+      if (this._isMounted) {
+        this.setState({
+          error: true
+        });
+      }
     });
   }
 

@@ -21,7 +21,12 @@ class Details extends Component {
   }
 
   componentDidMount() {
+    this._isMounted = true;
     this.getMovie();
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   getMovie() {
@@ -34,15 +39,19 @@ class Details extends Component {
       }
     })
     .then(data => {
-      this.setState({
-        loading: false,
-        movie: data,
-      });
+      if (this._isMounted) {
+        this.setState({
+          loading: false,
+          movie: data,
+        });
+      }
     })
     .catch(error => {
-      this.setState({
-        error: true
-      });
+      if (this._isMounted) {
+        this.setState({
+          error: true
+        });
+      }
     });
   }
 
