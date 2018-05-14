@@ -5,7 +5,10 @@ import Movie from './Movie';
 const movie = {
     id: 3,
     vote_average: 9,
-    title: 'example 3'
+    title: 'example 3',
+    overview: 'Test',
+    poster_path: '/path/to/image',
+    release_date: '2017-04-28',
 };
 
 it('renders without crashing', () => {
