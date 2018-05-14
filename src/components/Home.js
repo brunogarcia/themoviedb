@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import api from '../api';
+import Loading from './Loading';
+import Error from './Error';
 
 class Home extends Component {
   constructor(props) {
@@ -39,6 +41,14 @@ class Home extends Component {
   }
 
   render () {
+    const { error, loading } = this.state;
+
+    if (error) {
+      return <Error/>;
+    } else if (loading) {
+      return <Loading/>;
+    }
+
     return 'Home';
   }
 }
