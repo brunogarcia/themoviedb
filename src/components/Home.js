@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import api from '../api';
+import Search from './Search';
 import Movies from './Movies';
 import Loading from './Loading';
 import Error from './Error';
@@ -45,6 +46,7 @@ class Home extends Component {
 
     return (
       <div className="Home-main">
+        <Search {...this.props}/>
         <Movies data={movies}/>
       </div>
     );

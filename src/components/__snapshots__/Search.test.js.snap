@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="Search-main container"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="col-xs-12"
+    >
+      <form
+        className="Search-form form-inline"
+        onSubmit={[Function]}
+      >
+        <div
+          className="input-group input-group-lg"
+        >
+          <input
+            className="Search-input form-control"
+            onChange={[Function]}
+            placeholder="Writes a movie name"
+            type="text"
+            value=""
+          />
+          <span
+            className="input-group-btn"
+          >
+            <a
+              className="Search-button btn btn-default"
+              disabled={true}
+              href="/results/"
+              onClick={[Function]}
+            >
+              <span
+                aria-hidden="true"
+                className="glyphicon glyphicon-search"
+              />
+               Search
+            </a>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+`;
