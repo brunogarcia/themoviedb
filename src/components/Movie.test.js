@@ -1,5 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import renderer from 'react-test-renderer';
+import { Link } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
 import Movie from './Movie';
 
 const movie = {
@@ -11,8 +13,13 @@ const movie = {
     release_date: '2017-04-28',
 };
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<Movie key={movie.key} data={movie} />, div);
-  ReactDOM.unmountComponentAtNode(div);
+test('renders without crashing', () => {
+  const component = renderer.create(
+    <MemoryRouter>
+      <Movie key={movie.key} data={movie} />
+    </MemoryRouter>
+  );
+
+  let tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
 });

@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing 1`] = `
+<div
+  className="col-lg-6 col-sm-12"
+>
+  <div
+    className="Movie-card"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col-md-4 col-sm-12"
+      >
+        <a
+          href="/details/3"
+          onClick={[Function]}
+        >
+          <img
+            alt="example 3"
+            src="http://image.tmdb.org/t/p/w185/path/to/image"
+            title="example 3"
+          />
+        </a>
+      </div>
+      <div
+        className="col-md-8 col-sm-12"
+      >
+        <div
+          className="Movie-body"
+        >
+          <div
+            className="media"
+          >
+            <div
+              className="media-left"
+            >
+              <span
+                className="label label-success"
+              >
+                9
+              </span>
+            </div>
+            <div
+              className="media-body"
+            >
+              <h4
+                className="media-heading"
+              >
+                <a
+                  href="/details/3"
+                  onClick={[Function]}
+                >
+                  <span
+                    className="Movie-title"
+                  >
+                    example 3
+                  </span>
+                </a>
+                <br />
+                <small>
+                  April 28, 2017
+                </small>
+              </h4>
+            </div>
+          </div>
+          <div
+            className="Movie-overview"
+          >
+            <p>
+              Test
+              ...
+            </p>
+          </div>
+          <div
+            className="Movie-details"
+          >
+            <a
+              className="Movie-details-link"
+              href="/details/3"
+              onClick={[Function]}
+            >
+              <span
+                aria-hidden="true"
+                className="glyphicon glyphicon-info-sign"
+              />
+                More info
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
