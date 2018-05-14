@@ -1,6 +1,5 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { Link } from 'react-router-dom';
 import { MemoryRouter } from 'react-router';
 import Movie from './Movie';
 
@@ -13,7 +12,7 @@ const movie = {
     release_date: '2017-04-28',
 };
 
-test('renders without crashing', () => {
+test('renders correctly', () => {
   const component = renderer.create(
     <MemoryRouter>
       <Movie key={movie.key} data={movie} />

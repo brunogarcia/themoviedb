@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<img
+  alt="The Movie"
+  src="http://image.tmdb.org/t/p/w185/path/to/image"
+  title="The Movie"
+/>
+`;
