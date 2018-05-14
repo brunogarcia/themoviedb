@@ -1,6 +1,6 @@
 .Header-main {
     background-color: #222;
-    height: 80px;
+    height: 150px;
     padding: 10px;
     color: white;
 }
@@ -12,3 +12,10 @@
 .Header-nav {
     margin-top: 10px;
 }
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .Header-main {
+        height: 80px;
+    }
+ }

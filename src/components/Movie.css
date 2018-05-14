@@ -1,0 +1,50 @@
+.Movie-card {
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 2em;
+    min-height: 278px;
+}
+
+.Movie-body {
+    text-align: left;
+    padding: 20px;
+    position: relative;
+    min-height: 278px;
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .Movie-body {
+        padding: 10px 20px;
+    }
+ }
+
+.Movie-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.Movie-overview {
+    padding-top: 1em;
+}
+
+.Movie-details {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: solid #eee 1px;
+    padding: 1em 1em 1em 1.2em;
+    width: 100%;
+    display: inline-block;
+    color: #666;
+}
+
+.Movie-details-link {
+    color: #666;
+}
+
+.Movie-details:hover {
+    text-decoration: none;
+}
