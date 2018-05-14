@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './components/Home';
 import Details from './components/Details';
@@ -12,6 +12,7 @@ const { PATH } = CONSTANTS.APP;
 
 const App = () => {
   return (
+    <Router>
     <div className="App">
       <Header/>
       <Switch>
@@ -21,6 +22,7 @@ const App = () => {
       </Switch>
       <Footer/>
     </div>
+    </Router>
   );
 }
 

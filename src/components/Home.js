@@ -27,7 +27,6 @@ class Home extends Component {
       }
     })
     .then(data => {
-      console.log(data.results);
       this.setState({
         movies: data.results,
         loading: false,
@@ -40,6 +39,17 @@ class Home extends Component {
     });
   }
 
+  renderHome() {
+    const { movies } = this.state;
+    console.log(movies);
+
+    return (
+      <div className="Home-main">
+        Home
+      </div>
+    );
+  }
+
   render () {
     const { error, loading } = this.state;
 
@@ -49,7 +59,7 @@ class Home extends Component {
       return <Loading/>;
     }
 
-    return 'Home';
+    return this.renderHome();
   }
 }
 
