@@ -5,6 +5,10 @@
     min-height: 278px;
 }
 
+.Movie-card img {
+    max-height: 278px;
+}
+
 .Movie-body {
     text-align: left;
     padding: 20px;

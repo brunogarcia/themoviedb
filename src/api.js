@@ -11,8 +11,17 @@ const api = {
     return this.get(config);
   },
 
-  get: function({path}) {
-    const myRequest = new Request(`${HOST}/${path}?api_key=${KEY}`);
+  search: function(query) {
+    const config = {
+      path: PATH.SEARCH,
+      params: `&query=${query}&page=1&include_adult=false`,
+    };
+
+    return this.get(config);
+  },
+
+  get: function({path, params = ''}) {
+    const myRequest = new Request(`${HOST}/${path}?api_key=${KEY}${params}`);
     return fetch(myRequest);
   }
 }

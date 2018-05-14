@@ -8,7 +8,8 @@ test('renders correctly', () => {
     history: {
       push: () => {},
     }
-  }
+  };
+  
   const component = renderer.create(
     <MemoryRouter>
       <Search {...props} />
