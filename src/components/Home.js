@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import api from '../api';
+import Movies from './Movies';
 import Loading from './Loading';
 import Error from './Error';
 
@@ -41,11 +42,10 @@ class Home extends Component {
 
   renderHome() {
     const { movies } = this.state;
-    console.log(movies);
 
     return (
       <div className="Home-main">
-        Home
+        <Movies data={movies}/>
       </div>
     );
   }
