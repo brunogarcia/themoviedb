@@ -2,39 +2,40 @@ import CONSTANTS from './constants';
 
 const { HOST, KEY, PATH } = CONSTANTS.API;
 
-const { POPULAR, MOVIE, SEARCH} = PATH;
+const { POPULAR, MOVIE, SEARCH } = PATH;
+
+const get = ({ path, subpath = '', params = '' }) => {
+  const config = `${HOST}/${path}${subpath}?api_key=${KEY}${params}`;
+  const myRequest = new Request(config);
+  return fetch(myRequest);
+};
 
 const api = {
-  getPopularMovies: function() {
+  getPopularMovies: () => {
     const config = {
-      path: POPULAR
+      path: POPULAR,
     };
 
-    return this.get(config);
+    return get(config);
   },
 
-  getMovie: function(id) {
+  getMovie: (id) => {
     const config = {
       path: MOVIE,
       subpath: `/${id}`,
     };
 
-    return this.get(config);
+    return get(config);
   },
 
-  search: function(query) {
+  search: (query) => {
     const config = {
       path: SEARCH,
       params: `&query=${query}&page=1&include_adult=false`,
     };
 
-    return this.get(config);
+    return get(config);
   },
-
-  get: function({path, subpath = '', params = ''}) {
-    const myRequest = new Request(`${HOST}/${path}${subpath}?api_key=${KEY}${params}`);
-    return fetch(myRequest);
-  }
-}
+};
 
 export default api;
