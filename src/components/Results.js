@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import api from '../api';
 import Search from './Search';
 import Movies from './Movies';
@@ -17,44 +18,43 @@ class Results extends Component {
   }
 
   componentDidMount() {
-    this._isMounted = true;
-    const query = this.props.match.params.query;
+    this.isAlreadyMounted = true;
+    const { query } = this.props.match.params;
+    this.searchMovies(query);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { query } = nextProps.match.params;
     this.searchMovies(query);
   }
 
   componentWillUnmount() {
-    this._isMounted = false;
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const query = nextProps.match.params.query;
-    this.searchMovies(query);
+    this.isAlreadyMounted = false;
   }
 
   searchMovies(query) {
     api.search(query)
-    .then(response => {
-      if (response.ok) {
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
         return response.json();
-      } else {
-        throw Error(response.statusText);
-      }
-    })
-    .then(data => {
-      if (this._isMounted) {
-        this.setState({
-          movies: data.results,
-          loading: false,
-        });
-      }
-    })
-    .catch(error => {
-      if (this._isMounted) {
-        this.setState({
-          error: true
-        });
-      }
-    });
+      })
+      .then((data) => {
+        if (this.isAlreadyMounted) {
+          this.setState({
+            movies: data.results,
+            loading: false,
+          });
+        }
+      })
+      .catch(() => {
+        if (this.isAlreadyMounted) {
+          this.setState({
+            error: true,
+          });
+        }
+      });
   }
 
   renderResults() {
@@ -62,27 +62,35 @@ class Results extends Component {
 
     return (
       <div className="Results-main">
-        <Search {...this.props}/>
-        <Alert data={this.props.match.params.query}/>
-        <Movies data={movies}/>
+        <Search {...this.props} />
+        <Alert data={this.props.match.params.query} />
+        <Movies data={movies} />
       </div>
     );
   }
 
-  render () {
+  render() {
     const {
-      error, 
+      error,
       loading,
     } = this.state;
 
     if (error) {
-      return <Error/>;
+      return <Error />;
     } else if (loading) {
-      return <Loading/>;
+      return <Loading />;
     }
 
     return this.renderResults();
   }
 }
+
+Results.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      query: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 
 export default Results;

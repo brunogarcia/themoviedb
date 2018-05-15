@@ -10,20 +10,18 @@ import './App.css';
 
 const { PATH } = CONSTANTS.APP;
 
-const App = () => {
-  return (
-    <Router>
+const App = () => (
+  <Router>
     <div className="App">
-      <Header/>
+      <Header />
       <Switch>
-        <Route exact path={PATH.HOME} component={Home}/>
-        <Route path={PATH.RESULTS} component={Results}/>
-        <Route path={PATH.DETAILS} component={Details}/>
+        <Route exact path={PATH.HOME} component={Home} />
+        <Route path={PATH.RESULTS} component={Results} />
+        <Route path={PATH.DETAILS} component={Details} />
       </Switch>
-      <Footer/>
+      <Footer />
     </div>
-    </Router>
-  );
-}
+  </Router>
+);
 
 export default App;

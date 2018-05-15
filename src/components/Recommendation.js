@@ -1,44 +1,43 @@
 import React from 'react';
-import Icon from './Icon'
+import PropTypes from 'prop-types';
+import Icon from './Icon';
 import './Recommendation.css';
 
 const VOTE_GOOD = 8;
 const VOTE_BAD = 5;
 
-function goodChoice () {
-  return getChoice({
-    icon: 'thumbs-up',
-    message: 'Editor choice'
-  });
-}
+const goodChoice = {
+  icon: 'thumbs-up',
+  message: 'Editor choice',
+};
 
-function badChoice() {
-  return getChoice({
-    icon: 'thumbs-down',
-    message: 'Bad choice'
-  });
-}
+const badChoice = {
+  icon: 'thumbs-down',
+  message: 'Bad choice',
+};
 
-function getChoice({icon, message}) {
-  return (
-    <div className="Recommendation-main">
-      <Icon name={icon}/>
-      &nbsp;
-      <small>{message}</small>
-    </div>
-  );
-}
+const getChoice = ({ icon, message }) => (
+  <div className="Recommendation-main">
+    <Icon name={icon} /> <small>{message}</small>
+  </div>
+);
 
-function Recommendation (props) {
-  if (props.vote >= VOTE_GOOD) {
-    return goodChoice();
+const Recommendation = (props) => {
+  const { vote } = props;
+
+  if (vote >= VOTE_GOOD) {
+    return getChoice(goodChoice);
   }
 
-  if (props.vote <= VOTE_BAD) {
-    return badChoice();
+  if (vote <= VOTE_BAD) {
+    return getChoice(badChoice);
   }
 
   return null;
-}
+};
+
+Recommendation.propTypes = {
+  vote: PropTypes.number.isRequired,
+};
 
 export default Recommendation;

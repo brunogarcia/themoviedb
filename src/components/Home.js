@@ -16,38 +16,37 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this._isMounted = true;
+    this.isAlreadyMounted = true;
     this.getPopularMovies();
   }
 
   componentWillUnmount() {
-    this._isMounted = false;
+    this.isAlreadyMounted = false;
   }
 
   getPopularMovies() {
     api.getPopularMovies()
-    .then(response => {
-      if (response.ok) {
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
         return response.json();
-      } else {
-        throw Error(response.statusText);
-      }
-    })
-    .then(data => {
-      if (this._isMounted) {
-        this.setState({
-          movies: data.results,
-          loading: false,
-        });
-      }
-    })
-    .catch(error => {
-      if (this._isMounted) {
-        this.setState({
-          error: true
-        });
-      }
-    });
+      })
+      .then((data) => {
+        if (this.isAlreadyMounted) {
+          this.setState({
+            movies: data.results,
+            loading: false,
+          });
+        }
+      })
+      .catch(() => {
+        if (this.isAlreadyMounted) {
+          this.setState({
+            error: true,
+          });
+        }
+      });
   }
 
   renderHome() {
@@ -55,19 +54,19 @@ class Home extends Component {
 
     return (
       <div className="Home-main">
-        <Search {...this.props}/>
-        <Movies data={movies}/>
+        <Search {...this.props} />
+        <Movies data={movies} />
       </div>
     );
   }
 
-  render () {
+  render() {
     const { error, loading } = this.state;
 
     if (error) {
-      return <Error/>;
+      return <Error />;
     } else if (loading) {
-      return <Loading/>;
+      return <Loading />;
     }
 
     return this.renderHome();

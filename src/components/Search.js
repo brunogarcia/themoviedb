@@ -11,7 +11,7 @@ class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: ''
+      query: '',
     };
 
     this.handleSubmitSearch = this.handleSubmitSearch.bind(this);
@@ -20,7 +20,7 @@ class Search extends Component {
 
   handleChange(event) {
     this.setState({
-      query: event.target.value
+      query: event.target.value,
     });
   }
 
@@ -38,22 +38,21 @@ class Search extends Component {
       <Grid className="Search-main">
         <Row>
           <Col xs={12}>
-            <form className="Search-form form-inline" 
-                  onSubmit={this.handleSubmitSearch}>
+            <form className="Search-form form-inline" onSubmit={this.handleSubmitSearch}>
               <div className="input-group input-group-lg">
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={query}
                   onChange={this.handleChange}
-                  placeholder={'Writes a movie name'}
+                  placeholder="Writes a movie name"
                   className="Search-input form-control"
                 />
                 <span className="input-group-btn">
-                  <Link 
+                  <Link
                     to={`/results/${query}`}
                     disabled={disabled}
                     className="Search-button btn btn-default">
-                    <Icon name={'search'}/> Search
+                    <Icon name="search" /> Search
                   </Link>
                 </span>
               </div>
@@ -66,7 +65,9 @@ class Search extends Component {
 }
 
 Search.propTypes = {
-  history: PropTypes.object.isRequired,
-}
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default Search;

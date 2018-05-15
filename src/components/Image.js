@@ -4,22 +4,28 @@ import CONSTANTS from '../constants';
 
 const { HOST, DEFAULT, SIZE } = CONSTANTS.IMAGE;
 
-function Image (props) {
-  const { size, path, title } = props;
-  const src = path ?
-              `${HOST}${size}${path}` :
-              (size === SIZE.SMALL) ?
-              DEFAULT.SMALL : DEFAULT.LARGE;
+const getDefaultSrc = (size) => {
+  const isSmallSize = (size === SIZE.SMALL);
+  return isSmallSize ? DEFAULT.SMALL : DEFAULT.LARGE;
+};
 
-  return (
-    <img src={src} alt={title} title={title}/>
-  );
-}
+const getSrc = (size, path) => `${HOST}${size}${path}`;
+
+const Image = (props) => {
+  const { size, path, title } = props;
+  const src = path ? getSrc(size, path) : getDefaultSrc(size);
+
+  return <img src={src} alt={title} title={title} />;
+};
 
 Image.propTypes = {
   size: PropTypes.string.isRequired,
   path: PropTypes.string,
   title: PropTypes.string.isRequired,
-}
+};
+
+Image.defaultProps = {
+  path: '',
+};
 
 export default Image;

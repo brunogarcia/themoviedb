@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
+import { Grid, Row, Col } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import Loading from './Loading';
 import Error from './Error';
 import Image from './Image';
 import CONSTANTS from '../constants';
-import { Grid, Row, Col } from 'react-bootstrap';
 import api from '../api';
 import './Details.css';
 
 const { SIZE } = CONSTANTS.IMAGE;
 
 class Details extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -21,48 +21,47 @@ class Details extends Component {
   }
 
   componentDidMount() {
-    this._isMounted = true;
+    this.isAlreadyMounted = true;
     this.getMovie();
   }
 
   componentWillUnmount() {
-    this._isMounted = false;
+    this.isAlreadyMounted = false;
   }
 
   getMovie() {
     api.getMovie(this.props.match.params.id)
-    .then(response => {
-      if (response.ok) {
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
         return response.json();
-      } else {
-        throw Error(response.statusText);
-      }
-    })
-    .then(data => {
-      if (this._isMounted) {
-        this.setState({
-          loading: false,
-          movie: data,
-        });
-      }
-    })
-    .catch(error => {
-      if (this._isMounted) {
-        this.setState({
-          error: true
-        });
-      }
-    });
+      })
+      .then((data) => {
+        if (this.isAlreadyMounted) {
+          this.setState({
+            loading: false,
+            movie: data,
+          });
+        }
+      })
+      .catch(() => {
+        if (this.isAlreadyMounted) {
+          this.setState({
+            error: true,
+          });
+        }
+      });
   }
 
-  getGenres () {
+  getGenres() {
     const { genres } = this.state.movie;
 
     if (genres.length > 0) {
       const list = genres.map(genre => genre.name).join(', ');
-      
+
       return (
-        < div className="Details-genres">
+        <div className="Details-genres">
           <h2>Genres</h2>
           <p>{list}</p>
         </div>
@@ -72,7 +71,7 @@ class Details extends Component {
     return null;
   }
 
-  getHomepage () {
+  getHomepage() {
     const { homepage, title } = this.state.movie;
 
     if (homepage) {
@@ -90,57 +89,66 @@ class Details extends Component {
   renderMovie() {
     const {
       title,
-      poster_path,
       overview,
-      release_date,
-      vote_average,
+      poster_path: posterPath,
+      release_date: releaseDate,
+      vote_average: voteAverage,
     } = this.state.movie;
 
-    const releaseYear = new Date(release_date).getFullYear();
-    
+    const releaseYear = new Date(releaseDate).getFullYear();
+
     return (
       <Grid className="Details-main">
-      <Row>
-        <Col xs={12} md={4}>
-          <Image size={SIZE.LARGE} path={poster_path} title={title}/>
-        </Col>
+        <Row>
+          <Col xs={12} md={4}>
+            <Image size={SIZE.LARGE} path={posterPath} title={title} />
+          </Col>
 
-        <Col xs={12} md={8} className="Details-body">
-          <h1>
-            <span className={`label label-default`}>{vote_average}</span>
-            &nbsp;
-            {title}
-            &nbsp;
-            <small>({releaseYear})</small>
-          </h1>
+          <Col xs={12} md={8} className="Details-body">
+            <h1>
+              <span className="label label-default">{voteAverage}</span>
+              &nbsp;
+              {title}
+              &nbsp;
+              <small>({releaseYear})</small>
+            </h1>
 
-          <div className="Details-overview">
-            <p>{overview}</p>
-          </div>
+            <div className="Details-overview">
+              <p>{overview}</p>
+            </div>
 
-           {this.getGenres()}
+            {this.getGenres()}
 
-          {this.getHomepage()}
-        </Col>
-      </Row>
-    </Grid>
+            {this.getHomepage()}
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 
-  render () {
+  render() {
     const {
-      error, 
+      error,
       loading,
     } = this.state;
 
     if (error) {
-      return <Error/>;
+      return <Error />;
     } else if (loading) {
-      return <Loading/>;
+      return <Loading />;
     }
 
     return this.renderMovie();
   }
 }
+
+Details.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
+
 
 export default Details;

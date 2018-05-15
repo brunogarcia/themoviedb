@@ -1,7 +1,7 @@
 import React from 'react';
 import './Error.css';
 
-function Error (props) {
+const Error = () => {
   const message = 'Looks like there was a problem.';
 
   return (
@@ -9,6 +9,6 @@ function Error (props) {
       <p>{message}</p>
     </div>
   );
-}
+};
 
 export default Error;
