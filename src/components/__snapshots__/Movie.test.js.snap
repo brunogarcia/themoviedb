@@ -94,7 +94,7 @@ exports[`renders correctly 1`] = `
                 aria-hidden="true"
                 className="glyphicon glyphicon-thumbs-up"
               />
-               
+               
               <small>
                 Editor choice
               </small>

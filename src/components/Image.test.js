@@ -6,11 +6,11 @@ it('renders correctly', () => {
   const props = {
     size: 'w185',
     path: '/path/to/image',
-    title: 'The Movie'
+    title: 'The Movie',
   };
 
   const tree = renderer
-    .create(<Image {...props}/>)
+    .create(<Image {...props} />)
     .toJSON();
   expect(tree).toMatchSnapshot();
 });

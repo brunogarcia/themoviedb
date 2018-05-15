@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { MemoryRouter } from 'react-router';
+import { MemoryRouter as Router } from 'react-router';
 import Movie from './Movie';
 
 const movie = {
@@ -13,10 +13,7 @@ const movie = {
 };
 
 test('renders correctly', () => {
-  const component = renderer.create(
-    <MemoryRouter>
-      <Movie key={movie.key} data={movie} />
-    </MemoryRouter>);
+  const component = renderer.create(<Router><Movie key={movie.key} data={movie} /></Router>);
 
   const tree = component.toJSON();
   expect(tree).toMatchSnapshot();

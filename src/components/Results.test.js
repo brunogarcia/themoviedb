@@ -5,9 +5,9 @@ import Results from './Results';
 const props = {
   match: {
     params: {
-      query: 'test'
-    }
-  }
+      query: 'test',
+    },
+  },
 };
 
 it('renders without crashing', () => {

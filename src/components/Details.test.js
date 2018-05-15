@@ -5,9 +5,9 @@ import Details from './Details';
 const props = {
   match: {
     params: {
-      id: 1234
-    }
-  }
+      id: 1234,
+    },
+  },
 };
 
 it('renders without crashing', () => {

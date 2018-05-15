@@ -7,15 +7,11 @@ test('renders correctly', () => {
   const props = {
     history: {
       push: () => {},
-    }
+    },
   };
-  
-  const component = renderer.create(
-    <MemoryRouter>
-      <Search {...props} />
-    </MemoryRouter>
-  );
 
-  let tree = component.toJSON();
+  const component = renderer.create(<MemoryRouter><Search {...props} /></MemoryRouter>);
+
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });

@@ -4,6 +4,6 @@ import Alert from './Alert';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Alert />, div);
+  ReactDOM.render(<Alert data="test" />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
