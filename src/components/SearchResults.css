@@ -11,4 +11,13 @@
 
 .SearchResults-main a {
   display: block;
+  color: #333;
+}
+
+.SearchResults-main li:hover {
+  background-color: #eee;
+}
+
+.SearchResults-main a:hover {
+  text-decoration: none;
 }

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Media } from 'react-bootstrap';
-import CONSTANTS from '../constants';
-import Image from './Image';
 import Recommendation from './Recommendation';
+import Image from './Image';
 import Types from '../utils/types';
+import CONSTANTS from '../constants';
+import dateNormalized from '../utils/dateNormalized';
 import './Movie.css';
 
 const MAX_OVERVIEW_WORDS = 40;
@@ -43,12 +44,7 @@ const Movie = (props) => {
     .splice(0, MAX_OVERVIEW_WORDS)
     .join(' ');
 
-  const releaseDateNormalized = new Date(releaseDate)
-    .toLocaleString('en-us', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    });
+  const releaseDateNormalized = dateNormalized(releaseDate);
 
   const voteAverageNormalized = Math.floor(voteAverage);
 

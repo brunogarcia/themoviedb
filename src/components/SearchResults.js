@@ -36,10 +36,16 @@ const SearchResults = (props) => {
   return (
     <ListGroup className="SearchResults-main">
       {movies.map((movie) => {
-        const { id, title } = movie;
+        const { id, title, release_date: releaseDate } = movie;
+        const releaseDateNormalized = new Date(releaseDate).getFullYear();
+
         return (
           <ListGroupItem key={id}>
-            <Link onClick={handleMovieSelected} to={`/details/${id}`}>{title}</Link>
+            <Link onClick={handleMovieSelected} to={`/details/${id}`}>
+              {title}
+              <br />
+              <small>({releaseDateNormalized})</small>
+            </Link>
           </ListGroupItem>
         );
       })}
