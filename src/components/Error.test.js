@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Error from './Home';
+import Error from './Error';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
