@@ -2,3 +2,11 @@
     margin: 2em auto;
     position: relative;
 }
+
+.Search-clear {
+    position: absolute;
+    top: 1.2em;
+    right: 1em;
+    z-index: 3;
+    cursor: pointer;
+}

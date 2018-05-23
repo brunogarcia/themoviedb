@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, FormGroup, FormControl } from 'react-bootstrap';
+import { Grid, Row, Col, FormGroup, FormControl, Glyphicon } from 'react-bootstrap';
 import SearchResults from './SearchResults';
 import api from '../api/';
 import './Search.css';
@@ -74,6 +74,22 @@ class Search extends Component {
       });
   }
 
+  renderCloseIcon() {
+    const { query } = this.state;
+
+    if (query.length >= MIN_LENGTH_SEARCH) {
+      return (
+        <Glyphicon
+          glyph="remove"
+          className="Search-clear"
+          onClick={this.handleResetSearch}
+        />
+      );
+    }
+
+    return null;
+  }
+
   render() {
     const {
       query,
@@ -97,6 +113,7 @@ class Search extends Component {
                     className="Search-input form-control"
                   />
                 </FormGroup>
+                {this.renderCloseIcon()}
                 <SearchResults
                   error={error}
                   movies={movies}
