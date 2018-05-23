@@ -12,7 +12,6 @@ exports[`renders correctly 1`] = `
     >
       <form
         className="Search-form form-inline"
-        onSubmit={[Function]}
       >
         <div
           className="input-group input-group-lg"
@@ -20,26 +19,10 @@ exports[`renders correctly 1`] = `
           <input
             className="Search-input form-control"
             onChange={[Function]}
-            placeholder="Writes a movie name"
+            placeholder="Search a movie"
             type="text"
             value=""
           />
-          <span
-            className="input-group-btn"
-          >
-            <a
-              className="Search-button btn btn-default"
-              disabled={true}
-              href="/results/"
-              onClick={[Function]}
-            >
-              <span
-                aria-hidden="true"
-                className="glyphicon glyphicon-search"
-              />
-               Search
-            </a>
-          </span>
         </div>
       </form>
     </div>
