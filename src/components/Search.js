@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Grid, Row, Col, FormGroup, FormControl } from 'react-bootstrap';
 import SearchResults from './SearchResults';
 import api from '../api/';
 import './Search.css';
@@ -17,7 +17,7 @@ class Search extends Component {
     };
 
     this.handleChangeInputSearch = this.handleChangeInputSearch.bind(this);
-    this.handleMovieSelected = this.handleMovieSelected.bind(this);
+    this.handleResetSearch = this.handleResetSearch.bind(this);
   }
 
   componentDidMount() {
@@ -31,17 +31,17 @@ class Search extends Component {
   handleChangeInputSearch(event) {
     const query = event.target.value;
     this.setState({ query });
-    this.resetSearch(query);
+    this.checkMinLength(query);
   }
 
-  handleMovieSelected() {
+  handleResetSearch() {
     this.setState({
       query: '',
       movies: [],
     });
   }
 
-  resetSearch(query) {
+  checkMinLength(query) {
     const { length } = query;
 
     if (length < MIN_LENGTH_SEARCH) {
@@ -88,18 +88,20 @@ class Search extends Component {
           <Col xs={12}>
             <form className="Search-form form-inline">
               <div className="input-group input-group-lg">
-                <input
-                  type="text"
-                  value={query}
-                  onChange={this.handleChangeInputSearch}
-                  placeholder="Search a movie"
-                  className="Search-input form-control"
-                />
+                <FormGroup bsSize="large">
+                  <FormControl
+                    type="text"
+                    value={query}
+                    onChange={this.handleChangeInputSearch}
+                    placeholder="Search a movie"
+                    className="Search-input form-control"
+                  />
+                </FormGroup>
                 <SearchResults
                   error={error}
                   movies={movies}
                   loading={loading}
-                  onMovieSelected={this.handleMovieSelected}
+                  onMovieSelected={this.handleResetSearch}
                 />
               </div>
             </form>

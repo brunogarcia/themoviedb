@@ -16,13 +16,18 @@ exports[`renders correctly 1`] = `
         <div
           className="input-group input-group-lg"
         >
-          <input
-            className="Search-input form-control"
-            onChange={[Function]}
-            placeholder="Search a movie"
-            type="text"
-            value=""
-          />
+          <div
+            className="form-group form-group-lg"
+          >
+            <input
+              className="Search-input form-control form-control"
+              id={undefined}
+              onChange={[Function]}
+              placeholder="Search a movie"
+              type="text"
+              value=""
+            />
+          </div>
         </div>
       </form>
     </div>
