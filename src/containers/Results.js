@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import api from '../api';
-import Search from './Search';
-import Movies from './Movies';
-import Loading from './Loading';
-import Error from './Error';
-import Alert from './Alert';
+import Search from '../components/Search';
+import Movies from '../components/Movies';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
+import Alert from '../components/Alert';
 
 class Results extends Component {
   constructor(props) {
@@ -34,12 +34,6 @@ class Results extends Component {
 
   searchMovies(query) {
     api.search(query)
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-        return response.json();
-      })
       .then((data) => {
         if (this.isAlreadyMounted) {
           this.setState({

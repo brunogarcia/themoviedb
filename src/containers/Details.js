@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import Loading from './Loading';
-import Error from './Error';
-import Image from './Image';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
+import Image from '../components/Image';
 import CONSTANTS from '../constants';
 import api from '../api';
 import './Details.css';
@@ -31,12 +31,6 @@ class Details extends Component {
 
   getMovie() {
     api.getMovie(this.props.match.params.id)
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-        return response.json();
-      })
       .then((data) => {
         if (this.isAlreadyMounted) {
           this.setState({
