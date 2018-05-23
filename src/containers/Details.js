@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Loading from '../components/Loading';
 import Error from '../components/Error';
 import Image from '../components/Image';
+import Search from '../components/Search';
 import CONSTANTS from '../constants';
 import api from '../api/';
 import './Details.css';
@@ -14,6 +15,7 @@ class Details extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: this.props.match.params.id,
       loading: true,
       error: false,
       movie: {},
@@ -25,15 +27,26 @@ class Details extends Component {
     this.getMovie();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const { id } = this.props.match.params;
+
+    if (prevState.id !== id) {
+      this.getMovie();
+    }
+  }
+
   componentWillUnmount() {
     this.isAlreadyMounted = false;
   }
 
   getMovie() {
-    api.getMovie(this.props.match.params.id)
+    const { id } = this.props.match.params;
+
+    api.getMovie(id)
       .then((data) => {
         if (this.isAlreadyMounted) {
           this.setState({
+            id,
             loading: false,
             movie: data,
           });
@@ -92,31 +105,34 @@ class Details extends Component {
     const releaseYear = new Date(releaseDate).getFullYear();
 
     return (
-      <Grid className="Details-main">
-        <Row>
-          <Col xs={12} md={4}>
-            <Image size={SIZE.LARGE} path={posterPath} title={title} />
-          </Col>
+      <div className="Details-wrapper">
+        <Search />
+        <Grid className="Details-main">
+          <Row>
+            <Col xs={12} md={4}>
+              <Image size={SIZE.LARGE} path={posterPath} title={title} />
+            </Col>
 
-          <Col xs={12} md={8} className="Details-body">
-            <h1>
-              <span className="label label-default">{voteAverage}</span>
-              &nbsp;
-              {title}
-              &nbsp;
-              <small>({releaseYear})</small>
-            </h1>
+            <Col xs={12} md={8} className="Details-body">
+              <h1>
+                <span className="label label-default">{voteAverage}</span>
+                &nbsp;
+                {title}
+                &nbsp;
+                <small>({releaseYear})</small>
+              </h1>
 
-            <div className="Details-overview">
-              <p>{overview}</p>
-            </div>
+              <div className="Details-overview">
+                <p>{overview}</p>
+              </div>
 
-            {this.getGenres()}
+              {this.getGenres()}
 
-            {this.getHomepage()}
-          </Col>
-        </Row>
-      </Grid>
+              {this.getHomepage()}
+            </Col>
+          </Row>
+        </Grid>
+      </div>
     );
   }
 

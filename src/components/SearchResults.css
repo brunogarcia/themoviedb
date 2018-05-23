@@ -1,0 +1,14 @@
+.SearchResults-main {
+  position: absolute;
+  top: 46px;
+  left: 0;
+  z-index: 1;
+  overflow-y: scroll;
+  width: 100%;
+  max-height: 300px;
+  box-shadow: 10px 10px 8px rgba(0,0,0,0.1);
+}
+
+.SearchResults-main a {
+  display: block;
+}

@@ -48,7 +48,7 @@ class Home extends Component {
 
     return (
       <div className="Home-main">
-        <Search {...this.props} />
+        <Search />
         <Movies data={movies} />
       </div>
     );

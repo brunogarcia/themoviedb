@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Row } from 'react-bootstrap';
 import Movie from './Movie';
+import Types from '../utils/types';
 
 const Movies = props => (
   <Grid>
@@ -12,14 +13,7 @@ const Movies = props => (
 );
 
 Movies.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    vote_average: PropTypes.number.isRequired,
-    overview: PropTypes.string.isRequired,
-    poster_path: PropTypes.string,
-    release_date: PropTypes.string.isRequired,
-  })).isRequired,
+  data: PropTypes.arrayOf(Types.movie.isRequired).isRequired,
 };
 
 export default Movies;

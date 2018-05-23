@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-bootstrap';
-import Icon from './Icon';
+import SearchResults from './SearchResults';
+import api from '../api/';
 import './Search.css';
 
 const MIN_LENGTH_SEARCH = 3;
@@ -11,50 +10,97 @@ class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: false,
+      error: false,
       query: '',
+      movies: [],
     };
 
-    this.handleSubmitSearch = this.handleSubmitSearch.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeInputSearch = this.handleChangeInputSearch.bind(this);
+    this.handleMovieSelected = this.handleMovieSelected.bind(this);
   }
 
-  handleChange(event) {
+  componentDidMount() {
+    this.isAlreadyMounted = true;
+  }
+
+  componentWillUnmount() {
+    this.isAlreadyMounted = false;
+  }
+
+  handleChangeInputSearch(event) {
+    const query = event.target.value;
+    this.setState({ query });
+    this.resetSearch(query);
+  }
+
+  handleMovieSelected() {
     this.setState({
-      query: event.target.value,
+      query: '',
+      movies: [],
     });
   }
 
-  handleSubmitSearch(e) {
-    const { query } = this.state;
-    e.preventDefault();
-    this.props.history.push(`/results/${query}`);
+  resetSearch(query) {
+    const { length } = query;
+
+    if (length < MIN_LENGTH_SEARCH) {
+      this.setState({
+        movies: [],
+      });
+    }
+
+    if (length >= MIN_LENGTH_SEARCH) {
+      this.searchMovie(query);
+    }
+  }
+
+  searchMovie(query) {
+    api.search(query)
+      .then((data) => {
+        if (this.isAlreadyMounted) {
+          this.setState({
+            movies: data.results,
+            loading: false,
+          });
+        }
+      })
+      .catch(() => {
+        if (this.isAlreadyMounted) {
+          this.setState({
+            error: true,
+          });
+        }
+      });
   }
 
   render() {
-    const { query } = this.state;
-    const disabled = !query || query.length < MIN_LENGTH_SEARCH;
+    const {
+      query,
+      error,
+      loading,
+      movies,
+    } = this.state;
 
     return (
       <Grid className="Search-main">
         <Row>
           <Col xs={12}>
-            <form className="Search-form form-inline" onSubmit={this.handleSubmitSearch}>
+            <form className="Search-form form-inline">
               <div className="input-group input-group-lg">
                 <input
                   type="text"
                   value={query}
-                  onChange={this.handleChange}
-                  placeholder="Writes a movie name"
+                  onChange={this.handleChangeInputSearch}
+                  placeholder="Search a movie"
                   className="Search-input form-control"
                 />
-                <span className="input-group-btn">
-                  <Link
-                    to={`/results/${query}`}
-                    disabled={disabled}
-                    className="Search-button btn btn-default">
-                    <Icon name="search" /> Search
-                  </Link>
-                </span>
+                <SearchResults
+                  error={error}
+                  movies={movies}
+                  loading={loading}
+                  onMovieSelected={this.handleMovieSelected}
+                />
               </div>
             </form>
           </Col>
@@ -63,11 +109,5 @@ class Search extends Component {
     );
   }
 }
-
-Search.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
-};
 
 export default Search;

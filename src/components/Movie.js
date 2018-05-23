@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { Row, Col, Media } from 'react-bootstrap';
 import CONSTANTS from '../constants';
 import Image from './Image';
 import Recommendation from './Recommendation';
+import Types from '../utils/types';
 import './Movie.css';
 
 const MAX_OVERVIEW_WORDS = 40;
@@ -107,14 +107,7 @@ const Movie = (props) => {
 };
 
 Movie.propTypes = {
-  data: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    vote_average: PropTypes.number.isRequired,
-    overview: PropTypes.string.isRequired,
-    poster_path: PropTypes.string,
-    release_date: PropTypes.string.isRequired,
-  }).isRequired,
+  data: Types.movie.isRequired,
 };
 
 export default Movie;
