@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import api from '../api';
+import api from '../api/';
 import Search from '../components/Search';
 import Movies from '../components/Movies';
 import Loading from '../components/Loading';

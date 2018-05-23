@@ -5,7 +5,7 @@ import Loading from '../components/Loading';
 import Error from '../components/Error';
 import Image from '../components/Image';
 import CONSTANTS from '../constants';
-import api from '../api';
+import api from '../api/';
 import './Details.css';
 
 const { SIZE } = CONSTANTS.IMAGE;
