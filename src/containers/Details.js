@@ -51,7 +51,7 @@ class Details extends Component {
   getGenres() {
     const { genres } = this.state.movie;
 
-    if (genres.length > 0) {
+    if (genres && genres.length > 0) {
       const list = genres.map(genre => genre.name).join(', ');
 
       return (

@@ -20,6 +20,8 @@ const movies = [
     overview: 'test',
     poster_path: '',
     release_date: 'test',
+    genres: ['test', 'test'],
+    homepage: 'test',
   },
   {
     id: 2,
@@ -28,16 +30,18 @@ const movies = [
     overview: 'test',
     poster_path: '',
     release_date: 'test',
+    genres: ['test', 'test'],
+    homepage: 'test',
   },
 ];
 
-describe('Home component', () => {
-  it('renders differently with default state', () => {
+describe('Home states', () => {
+  it('renders Loading component with default state', () => {
     const wrapper = shallow(<Home />);
     expect(wrapper.find(Loading).exists()).toBeTruthy();
   });
 
-  it('renders differently with some error', () => {
+  it('renders Error component with some error', () => {
     const wrapper = shallow(<Home />);
 
     wrapper.setState({
@@ -48,33 +52,9 @@ describe('Home component', () => {
 
     expect(wrapper.find(Error).exists()).toBeTruthy();
   });
+});
 
-  it('must render Movies component when has movies', () => {
-    const wrapper = shallow(<Home {...props} />);
-
-    wrapper.setState({
-      loading: false,
-      error: false,
-      movies,
-    });
-
-    expect(wrapper.find(Movies).exists()).toBeTruthy();
-  });
-
-  it('must render Search component when has movies', () => {
-    const wrapper = shallow(<Home {...props} />);
-
-    wrapper.setState({
-      loading: false,
-      error: false,
-      movies,
-    });
-
-    wrapper.setProps({ history: { push: () => {} } });
-
-    expect(wrapper.find(Search).exists()).toBeTruthy();
-  });
-
+describe('Home lifecycle', () => {
   it('should call getPopularMovies when the component did mount', () => {
     const getPopularMoviesMocked = jest.spyOn(Home.prototype, 'getPopularMovies');
 
@@ -83,5 +63,28 @@ describe('Home component', () => {
     expect(getPopularMoviesMocked).toHaveBeenCalledTimes(1);
 
     getPopularMoviesMocked.mockClear();
+  });
+});
+
+describe('Home render movies', () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = shallow(<Home {...props} />);
+
+    wrapper.setState({
+      loading: false,
+      error: false,
+      movies,
+    });
+  });
+
+  it('must render Movies component', () => {
+    expect(wrapper.find(Movies).exists()).toBeTruthy();
+  });
+
+  it('must render Search component', () => {
+    wrapper.setProps({ history: { push: () => {} } });
+    expect(wrapper.find(Search).exists()).toBeTruthy();
   });
 });
