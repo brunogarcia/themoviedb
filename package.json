@@ -2,6 +2,7 @@
   "name": "themoviedb",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "http://brunogarcia.github.io/themoviedb",
   "dependencies": {
     "bootstrap": "^3.3.7",
     "enzyme": "^3.3.0",
