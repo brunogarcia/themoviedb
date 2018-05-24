@@ -1,4 +1,4 @@
-import CONSTANTS from '../constants';
+import CONSTANTS from '../utils/constants';
 
 const { HOST, KEY, PATH } = CONSTANTS.API;
 
