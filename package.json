@@ -2,7 +2,7 @@
   "name": "themoviedb",
   "version": "0.1.0",
   "private": true,
-  "homepage" : "http://brunogarcia.github.io/themoviedb",
+  "proxy": "https://api.themoviedb.org/3",
   "dependencies": {
     "bootstrap": "^3.3.7",
     "enzyme": "^3.3.0",
@@ -14,10 +14,12 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
-    "react-test-renderer": "^16.3.2"
+    "react-test-renderer": "^16.3.2",
+    "serve": "^6.5.8"
   },
   "scripts": {
     "start": "react-scripts start",
+    "now-start": "serve --single ./build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
