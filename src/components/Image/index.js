@@ -2,24 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CONSTANTS from '../../utils/constants';
 
-const { HOST, DEFAULT, SIZE } = CONSTANTS.IMAGE;
+const { HOST } = CONSTANTS.IMAGE;
 
-const getDefaultSrc = (size) => {
-  const isSmallSize = (size === SIZE.SMALL);
-  return isSmallSize ? DEFAULT.SMALL : DEFAULT.LARGE;
-};
+const getNoPosterSrc = size => size.NO_POSTER;
 
-const getSrc = (size, path) => `${HOST}${size}${path}`;
+const getDefaultSrc = (size, path) => `${HOST}${size.DEFAULT}${path}`;
 
 const Image = (props) => {
   const { size, path, title } = props;
-  const src = path ? getSrc(size, path) : getDefaultSrc(size);
+  const src = path ? getDefaultSrc(size, path) : getNoPosterSrc(size);
 
   return <img src={src} alt={title} title={title} />;
 };
 
 Image.propTypes = {
-  size: PropTypes.string.isRequired,
+  size: PropTypes.shape({
+    DEFAULT: PropTypes.string.isRequired,
+    NO_POSTER: PropTypes.string.isRequired,
+  }).isRequired,
   path: PropTypes.string,
   title: PropTypes.string.isRequired,
 };

@@ -48,7 +48,7 @@ class Details extends Component {
           this.setState({
             id,
             loading: false,
-            movie: data,
+            movie: Object.assign({}, data),
           });
         }
       })
@@ -61,7 +61,7 @@ class Details extends Component {
       });
   }
 
-  getGenres() {
+  renderGenres() {
     const { genres } = this.state.movie;
 
     if (genres && genres.length > 0) {
@@ -78,7 +78,7 @@ class Details extends Component {
     return null;
   }
 
-  getHomepage() {
+  renderHomepage() {
     const { homepage, title } = this.state.movie;
 
     if (homepage) {
@@ -126,9 +126,9 @@ class Details extends Component {
                 <p>{overview}</p>
               </div>
 
-              {this.getGenres()}
+              {this.renderGenres()}
 
-              {this.getHomepage()}
+              {this.renderHomepage()}
             </Col>
           </Row>
         </Grid>

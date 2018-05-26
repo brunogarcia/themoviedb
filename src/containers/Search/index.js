@@ -60,7 +60,7 @@ class Search extends Component {
       .then((data) => {
         if (this.isAlreadyMounted) {
           this.setState({
-            movies: data.results,
+            movies: data.results.slice(),
             loading: false,
           });
         }

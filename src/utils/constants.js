@@ -18,12 +18,16 @@ export default {
   IMAGE: {
     HOST: 'http://image.tmdb.org/t/p/',
     DEFAULT: {
-      SMALL: 'https://dummyimage.com/185x278/eeeeee/999999&text=No+poster',
-      LARGE: 'https://dummyimage.com/300x450/eeeeee/999999&text=No+poster',
     },
     SIZE: {
-      SMALL: 'w185',
-      LARGE: 'w300',
+      SMALL: {
+        DEFAULT: 'w185',
+        NO_POSTER: 'https://dummyimage.com/185x278/eeeeee/999999&text=No+poster',
+      },
+      LARGE: {
+        DEFAULT: 'w300',
+        NO_POSTER: 'https://dummyimage.com/300x450/eeeeee/999999&text=No+poster',
+      },
     },
   },
 };
