@@ -61,6 +61,41 @@ class Details extends Component {
       });
   }
 
+  renderImage() {
+    const { title, poster_path: posterPath } = this.state.movie;
+    return <Image size={SIZE.LARGE} path={posterPath} title={title} />;
+  }
+
+  renderTitle() {
+    const {
+      title,
+      release_date: releaseDate,
+      vote_average: voteAverage,
+    } = this.state.movie;
+
+    const releaseYear = new Date(releaseDate).getFullYear();
+
+    return (
+      <h1>
+        <span className="label label-default">{voteAverage}</span>
+        &nbsp;
+        {title}
+        &nbsp;
+        <small>({releaseYear})</small>
+      </h1>
+    );
+  }
+
+  renderOverview() {
+    const { overview } = this.state.movie;
+
+    return (
+      <div className="Details-overview">
+        <p>{overview}</p>
+      </div>
+    );
+  }
+
   renderGenres() {
     const { genres } = this.state.movie;
 
@@ -94,40 +129,19 @@ class Details extends Component {
   }
 
   renderMovie() {
-    const {
-      title,
-      overview,
-      poster_path: posterPath,
-      release_date: releaseDate,
-      vote_average: voteAverage,
-    } = this.state.movie;
-
-    const releaseYear = new Date(releaseDate).getFullYear();
-
     return (
       <div className="Details-wrapper">
         <Search />
         <Grid className="Details-main">
           <Row>
-            <Col xs={12} md={4}>
-              <Image size={SIZE.LARGE} path={posterPath} title={title} />
+            <Col xs={12} md={4} className="Details-image">
+              {this.renderImage()}
             </Col>
 
             <Col xs={12} md={8} className="Details-body">
-              <h1>
-                <span className="label label-default">{voteAverage}</span>
-                &nbsp;
-                {title}
-                &nbsp;
-                <small>({releaseYear})</small>
-              </h1>
-
-              <div className="Details-overview">
-                <p>{overview}</p>
-              </div>
-
+              {this.renderTitle()}
+              {this.renderOverview()}
               {this.renderGenres()}
-
               {this.renderHomepage()}
             </Col>
           </Row>
