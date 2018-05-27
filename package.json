@@ -18,7 +18,7 @@
     "serve": "^6.5.8"
   },
   "now": {
-    "name": "themoviedb-brunogarcia",
+    "name": "themoviedb",
     "alias": "themoviedb-brunogarcia"
   },
   "scripts": {
