@@ -1,5 +1,7 @@
 # The Movie DB
 
+[![Build Status](https://travis-ci.org/brunogarcia/themoviedb.svg?branch=master)](https://travis-ci.org/brunogarcia/themoviedb)
+
 A technical task developed with React, Bootstrap and the API of [The Movie DB](https://www.themoviedb.org/documentation/api)
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
