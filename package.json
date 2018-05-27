@@ -17,12 +17,18 @@
     "react-test-renderer": "^16.3.2",
     "serve": "^6.5.8"
   },
+  "now": {
+    "name": "themoviedb-brunogarcia",
+    "alias": "themoviedb-brunogarcia"
+  },
   "scripts": {
     "start": "react-scripts start",
     "now-start": "serve --single ./build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "now -e NODE_ENV=production --token $NOW_TOKEN --npm",
+    "alias": "now alias --token=$NOW_TOKEN"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
