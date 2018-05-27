@@ -4,8 +4,27 @@ import Image from './index';
 
 it('renders correctly', () => {
   const props = {
-    size: 'w185',
+    size: {
+      DEFAULT: 'w185',
+      NO_POSTER: '/path/to/no-poster-image',
+    },
     path: '/path/to/image',
+    title: 'The Movie',
+  };
+
+  const tree = renderer
+    .create(<Image {...props} />)
+    .toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders with no poster image', () => {
+  const props = {
+    size: {
+      DEFAULT: 'w185',
+      NO_POSTER: '/path/to/no-poster-image',
+    },
+    path: '',
     title: 'The Movie',
   };
 
