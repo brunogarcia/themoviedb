@@ -14,6 +14,14 @@ const props = {
   },
 };
 
+const newProps = {
+  match: {
+    params: {
+      id: '56789',
+    },
+  },
+};
+
 const movie = {
   id: 1,
   title: 'test',
@@ -26,14 +34,17 @@ const movie = {
 };
 
 describe('Details states', () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = shallow(<Details {...props} />);
+  });
+
   it('renders Loading component with default state', () => {
-    const wrapper = shallow(<Details {...props} />);
     expect(wrapper.find(Loading).exists()).toBeTruthy();
   });
 
   it('renders Error component with some error', () => {
-    const wrapper = shallow(<Details {...props} />);
-
     wrapper.setState({
       loading: false,
       error: true,
@@ -45,6 +56,12 @@ describe('Details states', () => {
 });
 
 describe('Details lifecycle', () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = shallow(<Details {...props} />);
+  });
+
   it('should call getMovie when did mount', () => {
     const getMovieMocked = jest.spyOn(Details.prototype, 'getMovie');
 
@@ -53,6 +70,26 @@ describe('Details lifecycle', () => {
     expect(getMovieMocked).toHaveBeenCalledTimes(1);
 
     getMovieMocked.mockClear();
+  });
+
+  it('should call getMovie after recives new props', () => {
+    const getMovieMocked = jest.spyOn(Details.prototype, 'getMovie');
+
+    wrapper.setProps(newProps);
+
+    expect(getMovieMocked).toHaveBeenCalledTimes(2);
+
+    getMovieMocked.mockClear();
+  });
+
+  it('should call showLoading after recives new props', () => {
+    const showLoadingMocked = jest.spyOn(Details.prototype, 'showLoading');
+
+    wrapper.setProps(newProps);
+
+    expect(showLoadingMocked).toHaveBeenCalledTimes(1);
+
+    showLoadingMocked.mockClear();
   });
 });
 

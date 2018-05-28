@@ -15,7 +15,6 @@ class Details extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.match.params.id,
       loading: true,
       error: false,
       movie: {},
@@ -27,10 +26,9 @@ class Details extends Component {
     this.getMovie();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const { id } = this.props.match.params;
-
-    if (prevState.id !== id) {
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+      this.showLoading();
       this.getMovie();
     }
   }
@@ -46,7 +44,6 @@ class Details extends Component {
       .then((data) => {
         if (this.isAlreadyMounted) {
           this.setState({
-            id,
             loading: false,
             movie: Object.assign({}, data),
           });
@@ -60,6 +57,15 @@ class Details extends Component {
         }
       });
   }
+
+  showLoading() {
+    if (!this.state.loading) {
+      this.setState({
+        loading: true,
+      });
+    }
+  }
+
 
   renderImage() {
     const { title, poster_path: posterPath } = this.state.movie;
