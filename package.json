@@ -36,7 +36,6 @@
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.8.2",
-    "now": "^11.1.14",
-    "pre-commit": "^1.2.2"
+    "now": "^11.1.14"
   }
 }
