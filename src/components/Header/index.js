@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Icon from '../Icon';
+import Search from '../../containers/Search';
 import logo from '../../assets/logo.svg';
 import './styles.css';
 
@@ -12,11 +12,7 @@ const Header = () => (
           <img src={logo} className="Header-logo" alt="logo" />
         </Link>
       </div>
-      <p className="Header-nav navbar-text navbar-right">
-        <Link to="/" className="btn btn-success navbar-btn">
-          <Icon name="star" /> Popular movies
-        </Link>
-      </p>
+      <Search />
     </div>
   </nav>
 );

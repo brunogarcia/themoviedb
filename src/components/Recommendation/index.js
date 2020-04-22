@@ -1,26 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Icon from '../Icon';
+import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 import './styles.css';
 
 const VOTE_GOOD = 8;
 const VOTE_BAD = 5;
 
 const goodChoice = {
-  icon: 'thumbs-up',
   message: 'Editor choice',
+  icon: <FaThumbsUp className="Recommendation-icon" />,
 };
 
 const badChoice = {
-  icon: 'thumbs-down',
   message: 'Bad choice',
+  icon: <FaThumbsDown className="Recommendation-icon" />,
 };
 
-const getChoice = ({ icon, message }) => (
-  <div className="Recommendation-main">
-    <Icon name={icon} /> <small>{message}</small>
-  </div>
-);
+function getChoice(options) {
+  const { icon, message } = options;
+
+  return (
+    <div className="Recommendation-main">
+      <small>
+        {icon}
+        {message}
+      </small>
+    </div>
+  );
+}
 
 const Recommendation = (props) => {
   const { vote } = props;

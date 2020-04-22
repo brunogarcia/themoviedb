@@ -10,26 +10,36 @@ const messages = {
   error: 'Ups! We found an error. Try again in a few minutes.',
 };
 
-const renderMessage = message => <p className="SearchResults-message">{message}</p>;
+function renderMessage(message) {
+  return (
+    <p className="SearchResults-message">{message}</p>
+  );
+}
 
-const renderResults = (movies, onMovieSelected) => (
-  <ListGroup className="SearchResults-main">
-    {movies.map((movie) => {
-      const { id, title, release_date: releaseDate } = movie;
-      const releaseDateNormalized = new Date(releaseDate).getFullYear();
+function renderResults(movies, onMovieSelected) {
+  return (
+    <ListGroup className="SearchResults-main">
+      {movies.map((movie) => {
+        const { id, title, release_date: releaseDate } = movie;
+        const releaseDateNormalized = new Date(releaseDate).getFullYear();
 
-      return (
-        <ListGroupItem key={id}>
-          <Link onClick={onMovieSelected} to={`/details/${id}`}>
-            {title}
-            <br />
-            <small>({releaseDateNormalized})</small>
-          </Link>
-        </ListGroupItem>
-      );
-    })}
-  </ListGroup>
-);
+        return (
+          <ListGroupItem key={id}>
+            <Link onClick={onMovieSelected} to={`/details/${id}`}>
+              {title}
+              <br />
+              <small>
+                (
+                {releaseDateNormalized}
+                )
+              </small>
+            </Link>
+          </ListGroupItem>
+        );
+      })}
+    </ListGroup>
+  );
+}
 
 const SearchResults = (props) => {
   const {

@@ -2,13 +2,13 @@
 
 exports[`renders correctly 1`] = `
 <div
-  className="Search-main container"
+  className="Search-main navbar-text navbar-right"
 >
   <div
     className="row"
   >
     <div
-      className="col-xs-12"
+      className="col-12"
     >
       <form
         className="Search-form form-inline"
@@ -17,11 +17,10 @@ exports[`renders correctly 1`] = `
           className="input-group input-group-lg"
         >
           <div
-            className="form-group form-group-lg"
+            className="form-group"
           >
             <input
-              className="Search-input form-control form-control"
-              id={undefined}
+              className="Search-input form-control form-control form-control-lg"
               onChange={[Function]}
               placeholder="Search a movie"
               type="text"

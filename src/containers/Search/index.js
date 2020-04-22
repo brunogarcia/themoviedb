@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, FormGroup, FormControl, Glyphicon } from 'react-bootstrap';
+import { FaBan } from 'react-icons/fa';
+import {
+  Row,
+  Col,
+  FormGroup,
+  FormControl,
+} from 'react-bootstrap';
 import SearchResults from '../../components/SearchResults';
-import api from '../../api/';
+import api from '../../api/index';
 import './styles.css';
 
 const MIN_LENGTH_SEARCH = 3;
@@ -79,11 +85,15 @@ class Search extends Component {
 
     if (query.length >= MIN_LENGTH_SEARCH) {
       return (
-        <Glyphicon
-          glyph="remove"
+        <div
+          tabIndex="0"
+          role="button"
           className="Search-clear"
           onClick={this.handleResetSearch}
-        />
+          onKeyPress={this.handleResetSearch}
+        >
+          <FaBan />
+        </div>
       );
     }
 
@@ -99,13 +109,14 @@ class Search extends Component {
     } = this.state;
 
     return (
-      <Grid className="Search-main">
+      <div className="Search-main navbar-text navbar-right">
         <Row>
           <Col xs={12}>
             <form className="Search-form form-inline">
               <div className="input-group input-group-lg">
-                <FormGroup bsSize="large">
+                <FormGroup>
                   <FormControl
+                    size="lg"
                     type="text"
                     value={query}
                     onChange={this.handleChangeInputSearch}
@@ -124,7 +135,7 @@ class Search extends Component {
             </form>
           </Col>
         </Row>
-      </Grid>
+      </div>
     );
   }
 }

@@ -1,16 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Grid, Row, Col } from 'react-bootstrap';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
-import Image from '../../components/Image';
 import Details from './index';
+import DetailsComponent from '../../components/Details';
 
-const props = {
-  match: {
-    params: {
-      id: '1234',
-    },
+const match = {
+  params: {
+    id: '1234',
   },
 };
 
@@ -37,7 +34,7 @@ describe('Details states', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<Details {...props} />);
+    wrapper = shallow(<Details match={match} />);
   });
 
   it('renders Loading component with default state', () => {
@@ -59,13 +56,13 @@ describe('Details lifecycle', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<Details {...props} />);
+    wrapper = shallow(<Details match={match} />);
   });
 
   it('should call getMovie when did mount', () => {
     const getMovieMocked = jest.spyOn(Details.prototype, 'getMovie');
 
-    shallow(<Details {...props} />);
+    shallow(<Details match={match} />);
 
     expect(getMovieMocked).toHaveBeenCalledTimes(1);
 
@@ -97,7 +94,7 @@ describe('Details render a movie', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<Details {...props} />);
+    wrapper = shallow(<Details match={match} />);
 
     wrapper.setState({
       loading: false,
@@ -106,20 +103,7 @@ describe('Details render a movie', () => {
     });
   });
 
-
-  it('must render Grid component', () => {
-    expect(wrapper.find(Grid).exists()).toBeTruthy();
-  });
-
-  it('must render Row component', () => {
-    expect(wrapper.find(Row).exists()).toBeTruthy();
-  });
-
-  it('must render Col component', () => {
-    expect(wrapper.find(Col).exists()).toBeTruthy();
-  });
-
-  it('must render Image component', () => {
-    expect(wrapper.find(Image).exists()).toBeTruthy();
+  it('must render Details component', () => {
+    expect(wrapper.find(DetailsComponent).exists()).toBeTruthy();
   });
 });

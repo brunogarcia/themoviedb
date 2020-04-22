@@ -1,9 +1,8 @@
-const dateNormalized = value =>
-  new Date(value)
+export default function dateNormalized(value) {
+  return new Date(value)
     .toLocaleString('en-us', {
       day: 'numeric',
       month: 'long',
       year: 'numeric',
     });
-
-export default dateNormalized;
+}
