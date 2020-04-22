@@ -3,6 +3,16 @@
   "version": "0.2.0",
   "private": true,
   "proxy": "https://api.themoviedb.org/3",
+  "scripts": {
+    "start": "react-scripts start",
+    "now-start": "serve --single ./build",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "lint": "eslint src",
+    "deploy": "now --public -e NODE_ENV=production --token $NOW_TOKEN --npm",
+    "alias": "now --public alias --token=$NOW_TOKEN"
+  },
   "dependencies": {
     "bootstrap": "^4.4.1",
     "enzyme": "^3.11.0",
@@ -19,20 +29,6 @@
     "react-test-renderer": "^16.13.1",
     "serve": "^11.3.0"
   },
-  "now": {
-    "name": "themoviedb",
-    "alias": "themoviedb-brunogarcia"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "now-start": "serve --single ./build",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "lint": "eslint src",
-    "deploy": "now --public -e NODE_ENV=production --token $NOW_TOKEN --npm",
-    "alias": "now --public alias --token=$NOW_TOKEN"
-  },
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
@@ -40,7 +36,18 @@
     "eslint-plugin-jsdoc": "^24.0.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
+    "husky": "^4.2.5",
     "now": "^18.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run test"
+    }
+  },
+  "now": {
+    "name": "themoviedb",
+    "alias": "themoviedb-brunogarcia"
   },
   "browserslist": {
     "production": [
