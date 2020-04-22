@@ -1,5 +1,5 @@
 import { FaBan } from 'react-icons/fa';
-import React, { Component } from 'react';
+import React from 'react';
 import {
   Row,
   Col,
@@ -17,85 +17,48 @@ const MIN_LENGTH_SEARCH = 3;
  *
  * @returns {Search} - The react component
  */
-class Search extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: false,
-      error: false,
-      query: '',
-      movies: [],
-    };
+export default function Search() {
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(false);
+  const [query, setQuery] = React.useState('');
+  const [movies, setMovies] = React.useState([]);
 
-    this.handleChangeInputSearch = this.handleChangeInputSearch.bind(this);
-    this.handleResetSearch = this.handleResetSearch.bind(this);
-  }
+  const handleChangeInputSearch = (event) => {
+    const { value } = event.target;
+    setQuery(value);
+  };
 
-  componentDidMount() {
-    this.isAlreadyMounted = true;
-  }
+  const handleResetSearch = () => {
+    setQuery('');
+    setMovies([]);
+  };
 
-  componentWillUnmount() {
-    this.isAlreadyMounted = false;
-  }
-
-  handleChangeInputSearch(event) {
-    const query = event.target.value;
-    this.setState({ query });
-    this.checkMinLength(query);
-  }
-
-  handleResetSearch() {
-    this.setState({
-      query: '',
-      movies: [],
-    });
-  }
-
-  checkMinLength(query) {
+  React.useEffect(() => {
     const { length } = query;
 
-    if (length < MIN_LENGTH_SEARCH) {
-      this.setState({
-        movies: [],
-      });
-    }
-
     if (length >= MIN_LENGTH_SEARCH) {
-      this.searchMovie(query);
+      api.search(query)
+        .then((data) => {
+          const { results } = data;
+          setMovies(results);
+          setLoading(false);
+        })
+        .catch(() => {
+          setError(true);
+          setLoading(false);
+        });
     }
-  }
+  }, [query]);
 
-  searchMovie(query) {
-    api.search(query)
-      .then((data) => {
-        if (this.isAlreadyMounted) {
-          this.setState({
-            movies: data.results.slice(),
-            loading: false,
-          });
-        }
-      })
-      .catch(() => {
-        if (this.isAlreadyMounted) {
-          this.setState({
-            error: true,
-          });
-        }
-      });
-  }
-
-  renderCloseIcon() {
-    const { query } = this.state;
-
+  const renderCloseIcon = () => {
     if (query.length >= MIN_LENGTH_SEARCH) {
       return (
         <div
           tabIndex="0"
           role="button"
           className="Search-clear"
-          onClick={this.handleResetSearch}
-          onKeyPress={this.handleResetSearch}
+          onClick={handleResetSearch}
+          onKeyPress={handleResetSearch}
         >
           <FaBan />
         </div>
@@ -103,46 +66,35 @@ class Search extends Component {
     }
 
     return null;
-  }
+  };
 
-  render() {
-    const {
-      query,
-      error,
-      loading,
-      movies,
-    } = this.state;
-
-    return (
-      <div className="Search-main navbar-text navbar-right">
-        <Row>
-          <Col xs={12}>
-            <form className="Search-form form-inline">
-              <div className="input-group input-group-lg">
-                <FormGroup>
-                  <FormControl
-                    size="lg"
-                    type="text"
-                    value={query}
-                    onChange={this.handleChangeInputSearch}
-                    placeholder="Search a movie"
-                    className="Search-input form-control"
-                  />
-                </FormGroup>
-                {this.renderCloseIcon()}
-                <SearchResults
-                  error={error}
-                  movies={movies}
-                  loading={loading}
-                  onMovieSelected={this.handleResetSearch}
+  return (
+    <div className="Search-main navbar-text navbar-right">
+      <Row>
+        <Col xs={12}>
+          <form className="Search-form form-inline">
+            <div className="input-group input-group-lg">
+              <FormGroup>
+                <FormControl
+                  size="lg"
+                  type="text"
+                  value={query}
+                  onChange={handleChangeInputSearch}
+                  placeholder="Search a movie"
+                  className="Search-input form-control"
                 />
-              </div>
-            </form>
-          </Col>
-        </Row>
-      </div>
-    );
-  }
+              </FormGroup>
+              {renderCloseIcon()}
+              <SearchResults
+                error={error}
+                movies={movies}
+                loading={loading}
+                onMovieSelected={handleResetSearch}
+              />
+            </div>
+          </form>
+        </Col>
+      </Row>
+    </div>
+  );
 }
-
-export default Search;
