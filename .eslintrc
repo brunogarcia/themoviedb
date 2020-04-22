@@ -6,10 +6,13 @@
     "jest": true
   },
   "plugins": [
-    "jsdoc"
+    "jsdoc",
+    "react-hooks"
   ],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "jsx-a11y/anchor-is-valid": [ "error", {
       "components": [ "Link" ],
       "specialLink": [ "to" ]
