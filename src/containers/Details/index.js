@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import api from '../../api/index';
 import Error from '../../components/Error';
@@ -8,88 +8,41 @@ import DetailsComponent from '../../components/Details';
 /**
  * Container for display the details of a movie
  *
+ * @param {object} props - Th component props
  * @returns {Details} - The react component
  */
-class Details extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: true,
-      error: false,
-      movie: {},
-    };
-  }
+export default function Details({ match }) {
+  const { id: movieId } = match.params;
+  const [id] = React.useState(movieId);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState(false);
+  const [movie, setMovie] = React.useState({});
 
-  componentDidMount() {
-    this.isAlreadyMounted = true;
-    this.getMovie();
-  }
-
-  componentDidUpdate(prevProps) {
-    const { match } = this.props;
-
-    if (match.params.id !== prevProps.match.params.id) {
-      this.showLoading();
-      this.getMovie();
-    }
-  }
-
-  componentWillUnmount() {
-    this.isAlreadyMounted = false;
-  }
-
-  getMovie() {
-    const { match } = this.props;
-    const { id } = match.params;
+  React.useEffect(() => {
+    setLoading(true);
 
     api.getMovie(id)
       .then((data) => {
-        if (this.isAlreadyMounted) {
-          this.setState({
-            loading: false,
-            movie: { ...data },
-          });
-        }
+        setMovie(data);
+        setLoading(false);
       })
       .catch(() => {
-        if (this.isAlreadyMounted) {
-          this.setState({
-            error: true,
-          });
-        }
+        setError(true);
+        setLoading(false);
       });
+  }, [id]);
+
+  if (error) {
+    return <Error />;
   }
 
-  showLoading() {
-    const { loading } = this.state;
-
-    if (!loading) {
-      this.setState({
-        loading: true,
-      });
-    }
+  if (loading) {
+    return <Loading />;
   }
 
-  render() {
-    const { movie } = this.state;
-
-    const {
-      error,
-      loading,
-    } = this.state;
-
-    if (error) {
-      return <Error />;
-    }
-
-    if (loading) {
-      return <Loading />;
-    }
-
-    return (
-      <DetailsComponent movie={movie} />
-    );
-  }
+  return (
+    <DetailsComponent movie={movie} />
+  );
 }
 
 Details.propTypes = {
@@ -99,5 +52,3 @@ Details.propTypes = {
     }).isRequired,
   }).isRequired,
 };
-
-export default Details;
