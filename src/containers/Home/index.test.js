@@ -34,7 +34,7 @@ describe('Home states', () => {
     expect(wrapper.find(Loading).exists()).toBeTruthy();
   });
 
-  it('renders Error component with some error', () => {
+  xit('renders Error component with some error', () => {
     const wrapper = shallow(<Home />);
 
     wrapper.setState({
@@ -47,7 +47,7 @@ describe('Home states', () => {
   });
 });
 
-describe('Home lifecycle', () => {
+xdescribe('Home lifecycle', () => {
   it('should call getPopularMovies when the component did mount', () => {
     const getPopularMoviesMocked = jest.spyOn(Home.prototype, 'getPopularMovies');
 
@@ -59,7 +59,7 @@ describe('Home lifecycle', () => {
   });
 });
 
-describe('Home render movies', () => {
+xdescribe('Home render movies', () => {
   let wrapper;
 
   beforeEach(() => {
