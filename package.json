@@ -7,9 +7,9 @@
     "start": "react-scripts start",
     "now-start": "serve --single ./build",
     "build": "react-scripts build",
+    "lint": "eslint src/**/*.js",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "lint": "eslint src",
+    "test:ci": "CI=true react-scripts test",
     "deploy": "now --public -e NODE_ENV=production --token $NOW_TOKEN --npm",
     "alias": "now --public alias --token=$NOW_TOKEN"
   },
@@ -42,7 +42,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint",
-      "pre-push": "npm run test --watchAll"
+      "pre-push": "npm run test:ci"
     }
   },
   "now": {
