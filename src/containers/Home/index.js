@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import api from '../../api/index';
 import Movies from '../../components/Movies';
 import Loading from '../../components/Loading';
@@ -9,57 +9,33 @@ import Error from '../../components/Error';
  *
  * @returns {Home} - The react component
  */
-class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: true,
-      error: false,
-      movies: [],
-    };
-  }
+export default function Home() {
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState(false);
+  const [movies, setMovies] = React.useState([]);
 
-  componentDidMount() {
-    this.isAlreadyMounted = true;
-    this.getPopularMovies();
-  }
+  React.useEffect(() => {
+    setLoading(true);
 
-  componentWillUnmount() {
-    this.isAlreadyMounted = false;
-  }
-
-  getPopularMovies() {
     api.getPopularMovies()
       .then((data) => {
-        if (this.isAlreadyMounted) {
-          this.setState({
-            movies: data.results.slice(),
-            loading: false,
-          });
-        }
+        const { results } = data;
+        setMovies(results);
+        setLoading(false);
       })
       .catch(() => {
-        if (this.isAlreadyMounted) {
-          this.setState({
-            error: true,
-          });
-        }
+        setError(true);
+        setLoading(false);
       });
+  }, []);
+
+  if (error) {
+    return <Error />;
   }
 
-  render() {
-    const { error, loading, movies } = this.state;
-
-    if (error) {
-      return <Error />;
-    }
-
-    if (loading) {
-      return <Loading />;
-    }
-
-    return <Movies movies={movies} />;
+  if (loading) {
+    return <Loading />;
   }
+
+  return <Movies movies={movies} />;
 }
-
-export default Home;
