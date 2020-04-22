@@ -4,6 +4,11 @@ import Movies from '../../components/Movies';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 
+/**
+ * Container for display the home of the app
+ *
+ * @returns {Home} - The react component
+ */
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -42,16 +47,8 @@ class Home extends Component {
       });
   }
 
-  renderHome() {
-    const { movies } = this.state;
-
-    return (
-      <Movies data={movies} />
-    );
-  }
-
   render() {
-    const { error, loading } = this.state;
+    const { error, loading, movies } = this.state;
 
     if (error) {
       return <Error />;
@@ -61,7 +58,7 @@ class Home extends Component {
       return <Loading />;
     }
 
-    return this.renderHome();
+    return <Movies movies={movies} />;
   }
 }
 

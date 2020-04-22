@@ -5,16 +5,23 @@ import Movie from '../Movie';
 import Types from '../../utils/types';
 import './styles.css';
 
-const Movies = ({ data }) => (
-  <Container className="Movies-main">
-    <Row>
-      {data.map((movie) => <Movie key={movie.id} data={movie} />)}
-    </Row>
-  </Container>
-);
+/**
+ * Component for display the movie list
+ *
+ * @param {object} props - The props of the component
+ * @param {object} props.movies - The movie list
+ * @returns {Movies} - The react component
+ */
+export default function Movies({ movies }) {
+  return (
+    <Container className="Movies-main">
+      <Row>
+        {movies.map((movie) => <Movie key={movie.id} movie={movie} />)}
+      </Row>
+    </Container>
+  );
+}
 
 Movies.propTypes = {
-  data: PropTypes.arrayOf(Types.movie.isRequired).isRequired,
+  movies: PropTypes.arrayOf(Types.movie.isRequired).isRequired,
 };
-
-export default Movies;

@@ -5,6 +5,11 @@ import Error from '../../components/Error';
 import Loading from '../../components/Loading';
 import DetailsComponent from '../../components/Details';
 
+/**
+ * Container for display the details of a movie
+ *
+ * @returns {Details} - The react component
+ */
 class Details extends Component {
   constructor(props) {
     super(props);

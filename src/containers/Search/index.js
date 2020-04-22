@@ -1,17 +1,22 @@
-import React, { Component } from 'react';
 import { FaBan } from 'react-icons/fa';
+import React, { Component } from 'react';
 import {
   Row,
   Col,
   FormGroup,
   FormControl,
 } from 'react-bootstrap';
-import SearchResults from '../../components/SearchResults';
 import api from '../../api/index';
+import SearchResults from '../../components/SearchResults';
 import './styles.css';
 
 const MIN_LENGTH_SEARCH = 3;
 
+/**
+ * Container for display the search of the app
+ *
+ * @returns {Search} - The react component
+ */
 class Search extends Component {
   constructor(props) {
     super(props);

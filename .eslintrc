@@ -1,10 +1,13 @@
 {
-  "extends": "airbnb",
+  "extends": ["airbnb", "plugin:jsdoc/recommended"],
   "env": {
     "browser": true,
     "node": true,
     "jest": true
   },
+  "plugins": [
+    "jsdoc"
+  ],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "jsx-a11y/anchor-is-valid": [ "error", {

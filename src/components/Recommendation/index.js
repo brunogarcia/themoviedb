@@ -1,4 +1,5 @@
 import React from 'react';
+import isNil from 'lodash.isnil';
 import PropTypes from 'prop-types';
 import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 import './styles.css';
@@ -16,35 +17,48 @@ const badChoice = {
   icon: <FaThumbsDown className="Recommendation-icon" />,
 };
 
-function getChoice(options) {
-  const { icon, message } = options;
+/**
+ * Get the recommendation data
+ *
+ * @param {number} vote - The movie vote
+ * @returns {object|null} -The recommendation data
+ */
+function getRecommendation(vote) {
+  if (vote >= VOTE_GOOD) {
+    return goodChoice;
+  }
+
+  if (vote <= VOTE_BAD) {
+    return badChoice;
+  }
+
+  return null;
+}
+
+/**
+ * Component for display the recommendation of a movie
+ *
+ * @param {object} props - The props of the component
+ * @param {number} props.vote - The movie vote
+ * @returns {Recommendation|null} - The react component
+ */
+export default function Recommendation({ vote }) {
+  const recommendation = getRecommendation(vote);
+
+  if (isNil(recommendation)) {
+    return null;
+  }
 
   return (
     <div className="Recommendation-main">
       <small>
-        {icon}
-        {message}
+        {recommendation.icon}
+        {recommendation.message}
       </small>
     </div>
   );
 }
 
-const Recommendation = (props) => {
-  const { vote } = props;
-
-  if (vote >= VOTE_GOOD) {
-    return getChoice(goodChoice);
-  }
-
-  if (vote <= VOTE_BAD) {
-    return getChoice(badChoice);
-  }
-
-  return null;
-};
-
 Recommendation.propTypes = {
   vote: PropTypes.number.isRequired,
 };
-
-export default Recommendation;

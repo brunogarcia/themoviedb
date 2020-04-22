@@ -1,10 +1,15 @@
 import React from 'react';
 import './styles.css';
 
-const Footer = () => (
-  <footer className="Footer-main">
-    &copy; The Movie DB - 2020
-  </footer>
-);
-
-export default Footer;
+/**
+ * Component for display the footer of the app
+ *
+ * @returns {Footer} - The react component
+ */
+export default function Footer() {
+  return (
+    <footer className="Footer-main">
+      &copy; The Movie DB - 2020
+    </footer>
+  );
+}

@@ -15,10 +15,14 @@ const movie = {
   title: 'test',
   vote_average: 8,
   overview: 'test',
+  homepage: 'path/to',
   poster_path: 'path/to',
   release_date: '10/10/2018',
-  genres: ['test', 'test'],
-  homepage: 'test',
+  genres: [
+    { id: '123', name: 'test1' },
+    { id: '456', name: 'test2' },
+    { id: '789', name: 'test3' },
+  ],
 };
 
 describe('Details render a movie', () => {
@@ -27,7 +31,6 @@ describe('Details render a movie', () => {
   beforeEach(() => {
     wrapper = shallow(<Details movie={movie} match={match} />);
   });
-
 
   it('must render Container component', () => {
     expect(wrapper.find(Container).exists()).toBeTruthy();

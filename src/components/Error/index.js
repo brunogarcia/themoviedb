@@ -2,7 +2,12 @@ import React from 'react';
 import { FaSkullCrossbones } from 'react-icons/fa';
 import './styles.css';
 
-const Error = () => {
+/**
+ * Component for display the error message
+ *
+ * @returns {Error} - The react component
+ */
+export default function Error() {
   const message = 'Looks like there was a problem.';
 
   return (
@@ -13,6 +18,4 @@ const Error = () => {
       <p>{message}</p>
     </div>
   );
-};
-
-export default Error;
+}

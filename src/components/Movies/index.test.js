@@ -31,7 +31,7 @@ const movies = [
 ];
 
 test('renders correctly', () => {
-  const component = renderer.create(<Router><Movies data={movies} /></Router>);
+  const component = renderer.create(<Router><Movies movies={movies} /></Router>);
 
   const tree = component.toJSON();
   expect(tree).toMatchSnapshot();

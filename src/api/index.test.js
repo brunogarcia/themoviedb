@@ -51,4 +51,3 @@ describe('API actions do not work properly', () => {
     await expect(api.search()).rejects.toEqual(new Error(400));
   });
 });
-

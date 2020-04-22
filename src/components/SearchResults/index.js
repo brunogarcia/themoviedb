@@ -10,12 +10,13 @@ const messages = {
   error: 'Ups! We found an error. Try again in a few minutes.',
 };
 
-function renderMessage(message) {
-  return (
-    <p className="SearchResults-message">{message}</p>
-  );
-}
-
+/**
+ * Render the results
+ *
+ * @param {Array<object>} movies - The movie list
+ * @param {Function} onMovieSelected - The handler when the user selects a movie
+ * @returns {ListGroup} - The react-bootstrap component
+ */
 function renderResults(movies, onMovieSelected) {
   return (
     <ListGroup className="SearchResults-main">
@@ -25,7 +26,10 @@ function renderResults(movies, onMovieSelected) {
 
         return (
           <ListGroupItem key={id}>
-            <Link onClick={onMovieSelected} to={`/details/${id}`}>
+            <Link
+              to={`/details/${id}`}
+              onClick={onMovieSelected}
+            >
               {title}
               <br />
               <small>
@@ -41,7 +45,17 @@ function renderResults(movies, onMovieSelected) {
   );
 }
 
-const SearchResults = (props) => {
+/**
+ * Component for display the rearch results
+ *
+ * @param {object} props - The props of the component
+ * @param {boolean} props.error - The error flag
+ * @param {boolean} props.loading - The loading flag
+ * @param {Array<object>} props.movies - The movie list
+ * @param {Function} props.onMovieSelected - The handler when the user selected a movie
+ * @returns {SearchResults} - The react component
+ */
+export default function SearchResults(props) {
   const {
     error,
     loading,
@@ -50,11 +64,19 @@ const SearchResults = (props) => {
   } = props;
 
   if (error) {
-    return renderMessage(messages.error);
+    return (
+      <p className="SearchResults-message">
+        {messages.error}
+      </p>
+    );
   }
 
   if (loading) {
-    return renderMessage(messages.loading);
+    return (
+      <p className="SearchResults-message">
+        {messages.loading}
+      </p>
+    );
   }
 
   if (movies.length === 0) {
@@ -62,7 +84,7 @@ const SearchResults = (props) => {
   }
 
   return renderResults(movies, onMovieSelected);
-};
+}
 
 SearchResults.propTypes = {
   error: PropTypes.bool.isRequired,
@@ -70,5 +92,3 @@ SearchResults.propTypes = {
   onMovieSelected: PropTypes.func.isRequired,
   movies: PropTypes.arrayOf(Types.movie.isRequired).isRequired,
 };
-
-export default SearchResults;

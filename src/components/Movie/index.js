@@ -1,23 +1,40 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Row,
-  Col,
-  Badge,
-} from 'react-bootstrap';
 import { FaInfoCircle } from 'react-icons/fa';
-import Recommendation from '../Recommendation';
+import { Row, Col, Badge } from 'react-bootstrap';
 import Image from '../Image';
+import Recommendation from '../Recommendation';
 import Types from '../../utils/types';
 import CONSTANTS from '../../utils/constants';
-import dateNormalized from '../../utils/dateNormalized';
-import getLabelInfo from '../../utils/getLabelInfo';
+import getLabel from '../../utils/getLabel';
+import getDateNormalized from '../../utils/getDateNormalized';
 import './styles.css';
 
-const MAX_OVERVIEW_WORDS = 35;
 const { SIZE } = CONSTANTS.IMAGE;
 
-const Movie = ({ data }) => {
+/**
+ * Get the movie overview smaller
+ *
+ * @param {string} overview - The movie overview
+ * @returns {string} - The movie overview smaller
+ */
+function getOverviewSmaller(overview) {
+  const MAX_OVERVIEW_WORDS = 35;
+
+  return overview
+    .split(' ')
+    .splice(0, MAX_OVERVIEW_WORDS)
+    .join(' ');
+}
+
+/**
+ * Component for display the movie
+ *
+ * @param {object} props - The props of the component
+ * @param {object} props.movie - The movie data
+ * @returns {Movie} - The react component
+ */
+export default function Movie({ movie }) {
   const {
     id,
     title,
@@ -25,18 +42,13 @@ const Movie = ({ data }) => {
     overview,
     poster_path: posterPath,
     release_date: releaseDate,
-  } = data;
+  } = movie;
 
-  const overviewSmaller = overview
-    .split(' ')
-    .splice(0, MAX_OVERVIEW_WORDS)
-    .join(' ');
-
-  const releaseDateNormalized = dateNormalized(releaseDate);
+  const releaseDateNormalized = getDateNormalized(releaseDate);
 
   const voteAverageNormalized = Math.floor(voteAverage);
 
-  const labelInfo = getLabelInfo(voteAverageNormalized);
+  const label = getLabel(voteAverageNormalized);
 
   return (
     <Col sm={12} lg={6}>
@@ -54,7 +66,7 @@ const Movie = ({ data }) => {
               <Row>
                 <Col xs={1}>
                   <Badge
-                    variant={labelInfo}
+                    variant={label}
                   >
                     {voteAverage}
                   </Badge>
@@ -71,7 +83,7 @@ const Movie = ({ data }) => {
               </Row>
 
               <p className="Movie-overview">
-                {overviewSmaller}
+                {getOverviewSmaller(overview)}
                 ...
               </p>
 
@@ -92,10 +104,8 @@ const Movie = ({ data }) => {
       </div>
     </Col>
   );
-};
+}
 
 Movie.propTypes = {
-  data: Types.movie.isRequired,
+  movie: Types.movie.isRequired,
 };
-
-export default Movie;

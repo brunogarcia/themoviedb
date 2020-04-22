@@ -13,7 +13,7 @@ it('renders correctly', () => {
   };
 
   const tree = renderer
-    .create(<Image {...props} />)
+    .create(<Image size={props.size} path={props.path} title={props.title} />)
     .toJSON();
   expect(tree).toMatchSnapshot();
 });
@@ -29,7 +29,7 @@ it('renders with no poster image', () => {
   };
 
   const tree = renderer
-    .create(<Image {...props} />)
+    .create(<Image size={props.size} path={props.path} title={props.title} />)
     .toJSON();
   expect(tree).toMatchSnapshot();
 });
