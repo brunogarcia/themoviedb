@@ -20,8 +20,12 @@ export default function App() {
       <div className="App">
         <Header />
         <Switch>
-          <Route exact path={PATH.HOME} component={Home} />
-          <Route path={PATH.DETAILS} component={Details} />
+          <Route exact path={PATH.HOME}>
+            <Home />
+          </Route>
+          <Route path={PATH.DETAILS}>
+            <Details />
+          </Route>
         </Switch>
         <Footer />
       </div>
