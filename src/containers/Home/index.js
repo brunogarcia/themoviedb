@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import api from '../../api/';
-import Search from '../Search';
+import api from '../../api/index';
 import Movies from '../../components/Movies';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
@@ -47,10 +46,7 @@ class Home extends Component {
     const { movies } = this.state;
 
     return (
-      <div className="Home-main">
-        <Search />
-        <Movies data={movies} />
-      </div>
+      <Movies data={movies} />
     );
   }
 
@@ -59,7 +55,9 @@ class Home extends Component {
 
     if (error) {
       return <Error />;
-    } else if (loading) {
+    }
+
+    if (loading) {
       return <Loading />;
     }
 

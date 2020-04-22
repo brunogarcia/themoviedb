@@ -1,16 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Home from './index';
-import Search from '../Search';
 import Movies from '../../components/Movies';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
-
-const props = {
-  history: {
-    push: () => {},
-  },
-};
 
 const movies = [
   {
@@ -70,7 +63,7 @@ describe('Home render movies', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<Home {...props} />);
+    wrapper = shallow(<Home />);
 
     wrapper.setState({
       loading: false,
@@ -81,10 +74,5 @@ describe('Home render movies', () => {
 
   it('must render Movies component', () => {
     expect(wrapper.find(Movies).exists()).toBeTruthy();
-  });
-
-  it('must render Search component', () => {
-    wrapper.setProps({ history: { push: () => {} } });
-    expect(wrapper.find(Search).exists()).toBeTruthy();
   });
 });

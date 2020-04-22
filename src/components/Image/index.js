@@ -4,7 +4,7 @@ import CONSTANTS from '../../utils/constants';
 
 const { HOST } = CONSTANTS.IMAGE;
 
-const getNoPosterSrc = size => size.NO_POSTER;
+const getNoPosterSrc = (size) => size.NO_POSTER;
 
 const getDefaultSrc = (size, path) => `${HOST}${size.DEFAULT}${path}`;
 

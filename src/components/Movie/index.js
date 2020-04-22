@@ -1,35 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col, Media } from 'react-bootstrap';
+import {
+  Row,
+  Col,
+  Badge,
+} from 'react-bootstrap';
+import { FaInfoCircle } from 'react-icons/fa';
 import Recommendation from '../Recommendation';
 import Image from '../Image';
 import Types from '../../utils/types';
 import CONSTANTS from '../../utils/constants';
 import dateNormalized from '../../utils/dateNormalized';
+import getLabelInfo from '../../utils/getLabelInfo';
 import './styles.css';
 
-const MAX_OVERVIEW_WORDS = 40;
+const MAX_OVERVIEW_WORDS = 35;
 const { SIZE } = CONSTANTS.IMAGE;
 
-const getLabelInfo = (vote) => {
-  let label = 'label-danger';
-
-  if (vote > 5) {
-    label = 'label-warning';
-  }
-
-  if (vote > 6) {
-    label = 'label-info';
-  }
-
-  if (vote > 7) {
-    label = 'label-success';
-  }
-
-  return label;
-};
-
-const Movie = (props) => {
+const Movie = ({ data }) => {
   const {
     id,
     title,
@@ -37,7 +25,7 @@ const Movie = (props) => {
     overview,
     poster_path: posterPath,
     release_date: releaseDate,
-  } = props.data;
+  } = data;
 
   const overviewSmaller = overview
     .split(' ')
@@ -63,33 +51,37 @@ const Movie = (props) => {
           <Col sm={12} md={8}>
             <div className="Movie-body">
 
-              <Media>
-                <Media.Left>
-                  <span className={`label ${labelInfo}`}>{voteAverage}</span>
-                </Media.Left>
+              <Row>
+                <Col xs={1}>
+                  <Badge
+                    variant={labelInfo}
+                  >
+                    {voteAverage}
+                  </Badge>
+                </Col>
+                <Col xs={10}>
+                  <Link to={`/details/${id}`}>
+                    <span className="Movie-title">{title}</span>
+                  </Link>
+                  <br />
+                  <small>
+                    {releaseDateNormalized}
+                  </small>
+                </Col>
+              </Row>
 
-                <Media.Body>
-                  <Media.Heading>
-                    <Link to={`/details/${id}`}>
-                      <span className="Movie-title">{title}</span>
-                    </Link>
-                    <br />
-                    <small>
-                      {releaseDateNormalized}
-                    </small>
-                  </Media.Heading>
-                </Media.Body>
-              </Media>
-
-              <div className="Movie-overview">
-                <p>{overviewSmaller}...</p>
-              </div>
+              <p className="Movie-overview">
+                {overviewSmaller}
+                ...
+              </p>
 
               <div className="Movie-details">
                 <Link to={`/details/${id}`} className="Movie-details-link">
-                  <span className="glyphicon glyphicon-info-sign" aria-hidden="true" />
+                  <FaInfoCircle />
                   &nbsp;
-                  More info
+                  <small>
+                    More info
+                  </small>
                 </Link>
 
                 <Recommendation vote={voteAverageNormalized} />

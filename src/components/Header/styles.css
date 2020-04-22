@@ -1,16 +1,15 @@
 .Header-main {
     background-color: #222;
     height: 150px;
-    padding: 10px;
-    color: white;
+    padding: 20px;
 }
 
 .Header-logo {
     height: 60px;
 }
 
-.Header-nav {
-    margin-top: 10px;
+.Header-icon  {
+    margin-right: .5em;
 }
 
 /* Small devices (tablets, 768px and up) */

@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Row } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import Movie from '../Movie';
 import Types from '../../utils/types';
+import './styles.css';
 
-const Movies = props => (
-  <Grid>
+const Movies = ({ data }) => (
+  <Container className="Movies-main">
     <Row>
-      {props.data.map(movie => <Movie key={movie.id} data={movie} />)}
+      {data.map((movie) => <Movie key={movie.id} data={movie} />)}
     </Row>
-  </Grid>
+  </Container>
 );
 
 Movies.propTypes = {

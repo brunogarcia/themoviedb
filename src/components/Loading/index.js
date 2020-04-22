@@ -1,11 +1,12 @@
 import React from 'react';
-import spinner from '../../assets/spinner.svg';
+import { Spinner } from 'react-bootstrap';
 import './styles.css';
 
 const Loading = () => (
   <div className="Loading-main">
-    <img src={spinner} className="Loading-spinner" alt="spinner" />
-    <p>Loading...</p>
+    <Spinner animation="border" role="status">
+      <span className="sr-only">Loading...</span>
+    </Spinner>
   </div>
 );
 

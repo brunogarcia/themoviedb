@@ -1,6 +1,6 @@
 import React from 'react';
+import { FaSkullCrossbones } from 'react-icons/fa';
 import './styles.css';
-import Icon from '../Icon';
 
 const Error = () => {
   const message = 'Looks like there was a problem.';
@@ -8,7 +8,7 @@ const Error = () => {
   return (
     <div className="Error-main">
       <p className="Error-icon">
-        <Icon name="alert" />
+        <FaSkullCrossbones />
       </p>
       <p>{message}</p>
     </div>
