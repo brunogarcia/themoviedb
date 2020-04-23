@@ -41,10 +41,11 @@ export default function Search() {
         .then((data) => {
           const { results } = data;
           setMovies(results);
-          setLoading(false);
         })
         .catch(() => {
           setError(true);
+        })
+        .finally(() => {
           setLoading(false);
         });
     }
