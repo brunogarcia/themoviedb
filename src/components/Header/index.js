@@ -15,7 +15,7 @@ export default function Header() {
       <div className="container-fluid">
         <div className="navbar-header">
           <Link to="/">
-            <img src={logo} className="Header-logo" alt="logo" />
+            <img src={logo} className="Header-logo" alt="The Movie DB" />
           </Link>
         </div>
         <Search />
