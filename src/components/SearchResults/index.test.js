@@ -1,6 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, fireEvent } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import SearchResults from './index';
 
@@ -92,7 +91,7 @@ test('On selected a movie the handler is called', () => {
   const handler = jest.fn();
   const { getByText } = render(getNode(false, false, handler));
 
-  userEvent.click(getByText('Ad Astra'));
+  fireEvent.click(getByText('Ad Astra'));
 
   expect(handler).toHaveBeenCalled();
 });
