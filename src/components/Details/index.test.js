@@ -22,33 +22,40 @@ const movie = {
   ],
 };
 
-test('renders image alt', () => {
+test('renders the poster image', () => {
   const { getByAltText } = render(<Details movie={movie} />);
-  const image = getByAltText('Ad Astra');
+  const image = getByAltText('Poster of Ad Astra');
+
   expect(image).toBeInTheDocument();
+  expect(image.src).toBe('http://image.tmdb.org/t/p/w300/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg');
 });
 
-test('renders vote average', () => {
+test('renders a badge with the vote average', () => {
   const { getByText } = render(<Details movie={movie} />);
-  const vote = getByText('6');
-  expect(vote).toBeInTheDocument();
+  const badge = getByText('6');
+
+  expect(badge).toBeInTheDocument();
+  expect(badge.className).toBe('badge badge-warning');
 });
 
-test('renders title', () => {
+test('renders the title of the movie', () => {
   const { getByText } = render(<Details movie={movie} />);
   const title = getByText('Ad Astra');
+
   expect(title).toBeInTheDocument();
 });
 
 test('renders release year', () => {
   const { getByText } = render(<Details movie={movie} />);
   const releaseYear = getByText('(2019)');
+
   expect(releaseYear).toBeInTheDocument();
 });
 
 test('renders overview', () => {
   const { getByText } = render(<Details movie={movie} />);
-  const overview = getByText('The near future, a time when both hope and hardships drive humanity to look to the stars and beyond.');
+  const overview = getByText(/The near future/i);
+
   expect(overview).toBeInTheDocument();
 });
 
@@ -64,5 +71,6 @@ test('renders genres', () => {
 test('renders homepage link', () => {
   const { getByText } = render(<Details movie={movie} />);
   const link = getByText('https://www.foxmovies.com/movies/ad-astra');
+
   expect(link).toBeInTheDocument();
 });

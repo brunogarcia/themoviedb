@@ -62,7 +62,6 @@ export default function Movie({ movie }) {
 
           <Col sm={12} md={8}>
             <div className="Movie-body">
-
               <Row>
                 <Col xs={1}>
                   <Badge

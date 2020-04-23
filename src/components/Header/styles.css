@@ -1,15 +1,11 @@
 .Header-main {
-    background-color: #222;
     height: 150px;
     padding: 20px;
+    background-color: #222;
 }
 
 .Header-logo {
     height: 60px;
-}
-
-.Header-icon  {
-    margin-right: .5em;
 }
 
 /* Small devices (tablets, 768px and up) */

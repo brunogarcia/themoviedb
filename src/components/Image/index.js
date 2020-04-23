@@ -36,8 +36,9 @@ function getDefaultSrc(size, path) {
  */
 export default function Image({ size, path, title }) {
   const src = path ? getDefaultSrc(size, path) : getNoPosterSrc(size);
+  const altText = `Poster of ${title}`;
   return (
-    <img src={src} alt={title} title={title} />
+    <img src={src} alt={altText} title={altText} />
   );
 }
 
