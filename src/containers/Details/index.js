@@ -22,10 +22,11 @@ export default function Details() {
     api.getMovie(id)
       .then((data) => {
         setMovie(data);
-        setLoading(false);
       })
       .catch(() => {
         setError(true);
+      })
+      .finally(() => {
         setLoading(false);
       });
   }, [id]);
