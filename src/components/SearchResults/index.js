@@ -11,41 +11,6 @@ const messages = {
 };
 
 /**
- * Render the results
- *
- * @param {Array<object>} movies - The movie list
- * @param {Function} onMovieSelected - The handler when the user selects a movie
- * @returns {ListGroup} - The react-bootstrap component
- */
-function renderResults(movies, onMovieSelected) {
-  return (
-    <ListGroup className="SearchResults-main">
-      {movies.map((movie) => {
-        const { id, title, release_date: releaseDate } = movie;
-        const releaseDateNormalized = new Date(releaseDate).getFullYear();
-
-        return (
-          <ListGroupItem key={id}>
-            <Link
-              to={`/details/${id}`}
-              onClick={onMovieSelected}
-            >
-              {title}
-              <br />
-              <small>
-                (
-                {releaseDateNormalized}
-                )
-              </small>
-            </Link>
-          </ListGroupItem>
-        );
-      })}
-    </ListGroup>
-  );
-}
-
-/**
  * Component for display the rearch results
  *
  * @param {object} props - The props of the component
@@ -83,7 +48,31 @@ export default function SearchResults(props) {
     return null;
   }
 
-  return renderResults(movies, onMovieSelected);
+  return (
+    <ListGroup className="SearchResults-main">
+      {movies.map((movie) => {
+        const { id, title, release_date: releaseDate } = movie;
+        const releaseDateNormalized = new Date(releaseDate).getFullYear();
+
+        return (
+          <ListGroupItem key={id}>
+            <Link
+              to={`/details/${id}`}
+              onClick={onMovieSelected}
+            >
+              {title}
+              <br />
+              <small>
+                (
+                {releaseDateNormalized}
+                )
+              </small>
+            </Link>
+          </ListGroupItem>
+        );
+      })}
+    </ListGroup>
+  );
 }
 
 SearchResults.propTypes = {
