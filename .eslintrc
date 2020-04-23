@@ -1,5 +1,11 @@
 {
-  "extends": ["airbnb", "plugin:jsdoc/recommended"],
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "plugin:jsdoc/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:testing-library/recommended"
+  ],
   "env": {
     "browser": true,
     "node": true,
@@ -7,12 +13,11 @@
   },
   "plugins": [
     "jsdoc",
-    "react-hooks"
+    "react-hooks",
+    "testing-library"
   ],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
     "jsx-a11y/anchor-is-valid": [ "error", {
       "components": [ "Link" ],
       "specialLink": [ "to" ]

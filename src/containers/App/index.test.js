@@ -8,7 +8,6 @@ test('renders header message', () => {
   expect(headerMessage).toBeInTheDocument();
 });
 
-
 test('renders footer message', () => {
   const { getByText } = render(<App />);
   const footerMessage = getByText(/© The Movie DB - 2020/i);
