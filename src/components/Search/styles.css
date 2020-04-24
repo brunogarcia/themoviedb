@@ -1,11 +1,3 @@
 .Search-main {
     position: relative;
 }
-
-.Search-clear {
-    position: absolute;
-    top: .8em;
-    right: 1em;
-    z-index: 3;
-    cursor: pointer;
-}

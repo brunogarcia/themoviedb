@@ -23,5 +23,7 @@
 }
 
 .SearchResults-message {
-  padding-top: 20px;
+  position: absolute;
+  width: 287px;
+  top: 46px;
 }

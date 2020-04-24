@@ -1,5 +1,6 @@
 import React from 'react';
 import api from '../../api/index';
+import { SearchProvider } from '../../contexts/search';
 import SearchComponent from '../../components/Search';
 import CONSTANTS from '../../utils/constants';
 
@@ -45,13 +46,17 @@ export default function Search() {
   }, [query]);
 
   return (
-    <SearchComponent
-      error={error}
-      query={query}
-      movies={movies}
-      loading={loading}
-      handleResetSearch={handleResetSearch}
-      handleChangeInputSearch={handleChangeInputSearch}
-    />
+    <SearchProvider
+      value={{
+        error,
+        query,
+        movies,
+        loading,
+        handleResetSearch,
+        handleChangeInputSearch,
+      }}
+    >
+      <SearchComponent />
+    </SearchProvider>
   );
 }

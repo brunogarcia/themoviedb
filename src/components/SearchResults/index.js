@@ -1,8 +1,7 @@
 import React from 'react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import Types from '../../utils/types';
+import SearchContext from '../../contexts/search';
 import './styles.css';
 
 const messages = {
@@ -13,20 +12,15 @@ const messages = {
 /**
  * Component for display the rearch results
  *
- * @param {object} props - The props of the component
- * @param {boolean} props.error - The error flag
- * @param {boolean} props.loading - The loading flag
- * @param {Array<object>} props.movies - The movie list
- * @param {Function} props.onMovieSelected - The handler when the user selected a movie
  * @returns {SearchResults} - The react component
  */
-export default function SearchResults(props) {
+export default function SearchResults() {
   const {
     error,
     loading,
     movies,
-    onMovieSelected,
-  } = props;
+    handleResetSearch,
+  } = React.useContext(SearchContext);
 
   if (error) {
     return (
@@ -58,7 +52,7 @@ export default function SearchResults(props) {
           <ListGroupItem key={id}>
             <Link
               to={`/details/${id}`}
-              onClick={onMovieSelected}
+              onClick={handleResetSearch}
             >
               {title}
               <br />
@@ -74,10 +68,3 @@ export default function SearchResults(props) {
     </ListGroup>
   );
 }
-
-SearchResults.propTypes = {
-  error: PropTypes.bool.isRequired,
-  loading: PropTypes.bool.isRequired,
-  onMovieSelected: PropTypes.func.isRequired,
-  movies: PropTypes.arrayOf(Types.movie.isRequired).isRequired,
-};
