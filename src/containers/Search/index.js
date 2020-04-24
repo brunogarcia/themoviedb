@@ -1,16 +1,9 @@
-import { FaBan } from 'react-icons/fa';
 import React from 'react';
-import {
-  Row,
-  Col,
-  FormGroup,
-  FormControl,
-} from 'react-bootstrap';
 import api from '../../api/index';
-import SearchResults from '../../components/SearchResults';
-import './styles.css';
+import SearchComponent from '../../components/Search';
+import CONSTANTS from '../../utils/constants';
 
-const MIN_LENGTH_SEARCH = 3;
+const { SEARCH } = CONSTANTS;
 
 /**
  * Container for display the search of the app
@@ -36,7 +29,7 @@ export default function Search() {
   React.useEffect(() => {
     const { length } = query;
 
-    if (length >= MIN_LENGTH_SEARCH) {
+    if (length >= SEARCH.MIN_LENGTH) {
       api.search(query)
         .then((data) => {
           const { results } = data;
@@ -51,51 +44,14 @@ export default function Search() {
     }
   }, [query]);
 
-  const renderCloseIcon = () => {
-    if (query.length >= MIN_LENGTH_SEARCH) {
-      return (
-        <div
-          tabIndex="0"
-          role="button"
-          className="Search-clear"
-          onClick={handleResetSearch}
-          onKeyPress={handleResetSearch}
-        >
-          <FaBan />
-        </div>
-      );
-    }
-
-    return null;
-  };
-
   return (
-    <div className="Search-main navbar-text navbar-right">
-      <Row>
-        <Col xs={12}>
-          <form className="Search-form form-inline">
-            <div className="input-group input-group-lg">
-              <FormGroup>
-                <FormControl
-                  size="lg"
-                  type="text"
-                  value={query}
-                  onChange={handleChangeInputSearch}
-                  placeholder="Search a movie"
-                  className="Search-input form-control"
-                />
-              </FormGroup>
-              {renderCloseIcon()}
-              <SearchResults
-                error={error}
-                movies={movies}
-                loading={loading}
-                onMovieSelected={handleResetSearch}
-              />
-            </div>
-          </form>
-        </Col>
-      </Row>
-    </div>
+    <SearchComponent
+      error={error}
+      query={query}
+      movies={movies}
+      loading={loading}
+      handleResetSearch={handleResetSearch}
+      handleChangeInputSearch={handleChangeInputSearch}
+    />
   );
 }

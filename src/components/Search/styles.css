@@ -4,7 +4,7 @@
 
 .Search-clear {
     position: absolute;
-    top: .5em;
+    top: .8em;
     right: 1em;
     z-index: 3;
     cursor: pointer;
