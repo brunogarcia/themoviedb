@@ -27,7 +27,7 @@ test('renders the poster image', () => {
   const image = getByAltText('Poster of Ad Astra');
 
   expect(image).toBeInTheDocument();
-  expect(image.src).toBe('http://image.tmdb.org/t/p/w300/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg');
+  expect(image.src).toBe('https://image.tmdb.org/t/p/w300/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg');
 });
 
 test('renders a badge with the vote average', () => {

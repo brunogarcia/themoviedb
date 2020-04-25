@@ -19,7 +19,7 @@ export default {
     MIN_LENGTH: 3,
   },
   IMAGE: {
-    HOST: 'http://image.tmdb.org/t/p/',
+    HOST: 'https://image.tmdb.org/t/p/',
     DEFAULT: {
     },
     SIZE: {

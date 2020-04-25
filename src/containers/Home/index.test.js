@@ -59,7 +59,7 @@ describe('The container must request the popular movies', () => {
 
   it('Get popular movies: error', async () => {
     api.getPopularMovies = jest.fn().mockImplementation(() => new Promise((resolve, reject) => {
-      reject(new Error('Some kinf of problem on the API'));
+      reject(new Error('Some kind of problem on the API'));
     }));
 
     await act(async () => {

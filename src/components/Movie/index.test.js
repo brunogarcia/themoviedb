@@ -19,7 +19,7 @@ test('renders the poster image and a link to the movie details', () => {
 
   expect(image).toBeInTheDocument();
   expect(link.href).toBe('http://localhost/details/419704');
-  expect(image.src).toBe('http://image.tmdb.org/t/p/w185/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg');
+  expect(image.src).toBe('https://image.tmdb.org/t/p/w185/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg');
 });
 
 test('renders a badge with the vote average', () => {

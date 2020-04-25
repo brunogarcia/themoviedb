@@ -14,7 +14,7 @@ test('renders image', () => {
   const image = getByAltText('Poster of Underwater');
 
   expect(image).toBeInTheDocument();
-  expect(image.src).toBe('http://image.tmdb.org/t/p/w300/gzlbb3yeVISpQ3REd3Ga1scWGTU.jpg');
+  expect(image.src).toBe('https://image.tmdb.org/t/p/w300/gzlbb3yeVISpQ3REd3Ga1scWGTU.jpg');
 });
 
 test('renders no-poster image', () => {
