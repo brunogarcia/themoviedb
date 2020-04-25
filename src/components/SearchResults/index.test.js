@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { SearchProvider } from '../../contexts/search';
 import SearchResults from './index';
 
-const mockMovies = [
+const movies = [
   {
     id: 419704,
     title: 'Ad Astra',
@@ -24,31 +24,24 @@ const mockMovies = [
 ];
 
 /**
- * Get the node to test
+ * Get the components tree to testing
  *
  * @param {object} options - the options
  * @param {boolean} options.error - the error flag
  * @param {boolean} options.loading - the loading flag
- * @param {Array<object>} options.movies - the movies
- * @param {Function} options.handleResetSearch - the handler when the user resets the search
- * @returns {SearchResults} - The node to test
+ * @param {Array<object>} options.movies - the movies to render
+ * @param {Function} options.handleResetSearch - the handler when the user will reset the search
+ * @returns {SearchResults} - The components tree to testing
  */
-function getNode(options) {
-  const {
-    error = false,
-    loading = false,
-    movies,
-    handleResetSearch,
-  } = options;
-
+function getTree(options) {
   return (
     <Router>
       <SearchProvider
         value={{
-          error,
-          movies,
-          loading,
-          handleResetSearch,
+          error: options.error,
+          movies: options.movies,
+          loading: options.loading,
+          handleResetSearch: options.handleResetSearch,
         }}
       >
         <SearchResults />
@@ -58,12 +51,14 @@ function getNode(options) {
 }
 
 test('renders the links of the movies', () => {
-  const { getByText } = render(getNode({
+  const tree = getTree({
     error: false,
     loading: false,
-    movies: mockMovies,
+    movies,
     handleResetSearch: () => {},
-  }));
+  });
+
+  const { getByText } = render(tree);
 
   const title1 = getByText('Ad Astra');
   const title2 = getByText('Underwater');
@@ -76,12 +71,14 @@ test('renders the links of the movies', () => {
 });
 
 test('renders the titles of the movies', () => {
-  const { getByText } = render(getNode({
+  const tree = getTree({
     error: false,
     loading: false,
-    movies: mockMovies,
+    movies,
     handleResetSearch: () => {},
-  }));
+  });
+
+  const { getByText } = render(tree);
   const title1 = getByText('Ad Astra');
   const title2 = getByText('Underwater');
 
@@ -90,12 +87,14 @@ test('renders the titles of the movies', () => {
 });
 
 test('renders the release dates of the movies', () => {
-  const { getByText } = render(getNode({
+  const tree = getTree({
     error: false,
     loading: false,
-    movies: mockMovies,
+    movies,
     handleResetSearch: () => {},
-  }));
+  });
+
+  const { getByText } = render(tree);
   const releaseDate1 = getByText('(2020)');
   const releaseDate2 = getByText('(2019)');
 
@@ -104,24 +103,28 @@ test('renders the release dates of the movies', () => {
 });
 
 test('renders the loading message', () => {
-  const { getByText } = render(getNode({
+  const tree = getTree({
     error: false,
     loading: true,
     movies: {},
     handleResetSearch: () => {},
-  }));
+  });
+
+  const { getByText } = render(tree);
   const message = getByText('Loading movies...');
 
   expect(message).toBeInTheDocument();
 });
 
 test('renders the error message', () => {
-  const { getByText } = render(getNode({
+  const tree = getTree({
     error: true,
     loading: false,
     movies: {},
     handleResetSearch: () => {},
-  }));
+  });
+
+  const { getByText } = render(tree);
   const message = getByText('Ups! We found an error. Try again in a few minutes.');
 
   expect(message).toBeInTheDocument();
@@ -129,12 +132,15 @@ test('renders the error message', () => {
 
 test('On selected a movie the handler is called', () => {
   const handler = jest.fn();
-  const { getByText } = render(getNode({
+
+  const tree = getTree({
     error: false,
     loading: false,
-    movies: mockMovies,
+    movies,
     handleResetSearch: handler,
-  }));
+  });
+
+  const { getByText } = render(tree);
 
   fireEvent.click(getByText('Ad Astra'));
 
