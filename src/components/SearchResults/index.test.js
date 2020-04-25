@@ -1,9 +1,10 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { SearchProvider } from '../../contexts/search';
 import SearchResults from './index';
 
-const movies = [
+const mockMovies = [
   {
     id: 419704,
     title: 'Ad Astra',
@@ -25,26 +26,45 @@ const movies = [
 /**
  * Get the node to test
  *
- * @param {boolean} error - the error flag
- * @param {boolean} loading - the loading flag
- * @param {Function} onMovieSelected - the handler when the user selects a movie
+ * @param {object} options - the options
+ * @param {boolean} options.error - the error flag
+ * @param {boolean} options.loading - the loading flag
+ * @param {Array<object>} options.movies - the movies
+ * @param {Function} options.handleResetSearch - the handler when the user resets the search
  * @returns {SearchResults} - The node to test
  */
-function getNode(error = false, loading = false, onMovieSelected = () => {}) {
+function getNode(options) {
+  const {
+    error = false,
+    loading = false,
+    movies,
+    handleResetSearch,
+  } = options;
+
   return (
     <Router>
-      <SearchResults
-        movies={movies}
-        error={error}
-        loading={loading}
-        onMovieSelected={onMovieSelected}
-      />
+      <SearchProvider
+        value={{
+          error,
+          movies,
+          loading,
+          handleResetSearch,
+        }}
+      >
+        <SearchResults />
+      </SearchProvider>
     </Router>
   );
 }
 
 test('renders the links of the movies', () => {
-  const { getByText } = render(getNode());
+  const { getByText } = render(getNode({
+    error: false,
+    loading: false,
+    movies: mockMovies,
+    handleResetSearch: () => {},
+  }));
+
   const title1 = getByText('Ad Astra');
   const title2 = getByText('Underwater');
 
@@ -56,7 +76,12 @@ test('renders the links of the movies', () => {
 });
 
 test('renders the titles of the movies', () => {
-  const { getByText } = render(getNode());
+  const { getByText } = render(getNode({
+    error: false,
+    loading: false,
+    movies: mockMovies,
+    handleResetSearch: () => {},
+  }));
   const title1 = getByText('Ad Astra');
   const title2 = getByText('Underwater');
 
@@ -65,7 +90,12 @@ test('renders the titles of the movies', () => {
 });
 
 test('renders the release dates of the movies', () => {
-  const { getByText } = render(getNode());
+  const { getByText } = render(getNode({
+    error: false,
+    loading: false,
+    movies: mockMovies,
+    handleResetSearch: () => {},
+  }));
   const releaseDate1 = getByText('(2020)');
   const releaseDate2 = getByText('(2019)');
 
@@ -74,14 +104,24 @@ test('renders the release dates of the movies', () => {
 });
 
 test('renders the loading message', () => {
-  const { getByText } = render(getNode(false, true));
+  const { getByText } = render(getNode({
+    error: false,
+    loading: true,
+    movies: {},
+    handleResetSearch: () => {},
+  }));
   const message = getByText('Loading movies...');
 
   expect(message).toBeInTheDocument();
 });
 
 test('renders the error message', () => {
-  const { getByText } = render(getNode(true, false));
+  const { getByText } = render(getNode({
+    error: true,
+    loading: false,
+    movies: {},
+    handleResetSearch: () => {},
+  }));
   const message = getByText('Ups! We found an error. Try again in a few minutes.');
 
   expect(message).toBeInTheDocument();
@@ -89,7 +129,12 @@ test('renders the error message', () => {
 
 test('On selected a movie the handler is called', () => {
   const handler = jest.fn();
-  const { getByText } = render(getNode(false, false, handler));
+  const { getByText } = render(getNode({
+    error: false,
+    loading: false,
+    movies: mockMovies,
+    handleResetSearch: handler,
+  }));
 
   fireEvent.click(getByText('Ad Astra'));
 
