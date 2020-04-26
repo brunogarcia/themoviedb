@@ -19,6 +19,7 @@ export default function SearchForm() {
         size="lg"
         type="text"
         value={query}
+        data-cy="search-movie"
         className="form-control"
         placeholder="Search a movie"
         onChange={handleChangeInputSearch}

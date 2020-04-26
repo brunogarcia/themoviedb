@@ -42,17 +42,17 @@ function renderTitle(title, releaseDate, voteAverage) {
     <Container className="Details-title">
       <Row>
         <Col xs={2}>
-          <h1>
+          <p className="h1">
             <Badge variant={label}>
               {voteAverage}
             </Badge>
-          </h1>
+          </p>
         </Col>
         <Col>
-          <h1>
+          <h1 data-cy="movie-details-title">
             {title}
             &nbsp;
-            <small>
+            <small data-cy="movie-details-release-year">
               (
               {releaseYear}
               )

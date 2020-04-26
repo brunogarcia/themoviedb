@@ -3,6 +3,7 @@
     "airbnb",
     "airbnb/hooks",
     "plugin:jsdoc/recommended",
+    "plugin:cypress/recommended",
     "plugin:react-hooks/recommended",
     "plugin:testing-library/recommended"
   ],
@@ -13,6 +14,7 @@
   },
   "plugins": [
     "jsdoc",
+    "cypress",
     "react-hooks",
     "testing-library"
   ],

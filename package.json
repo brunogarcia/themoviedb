@@ -10,6 +10,8 @@
     "lint": "eslint src/**/*.js",
     "test": "react-scripts test",
     "test:ci": "CI=true react-scripts test",
+    "e2e": "cypress open",
+    "cypress": "cypress run --record --key f64ab05f-e93d-4577-a336-2a3d5c3c8bec",
     "deploy": "now --public -e NODE_ENV=production --token $NOW_TOKEN --npm",
     "alias": "now --public alias --token=$NOW_TOKEN"
   },
@@ -31,8 +33,10 @@
     "serve": "^11.3.0"
   },
   "devDependencies": {
+    "cypress": "^4.4.1",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
+    "eslint-plugin-cypress": "^2.10.3",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsdoc": "^24.0.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",

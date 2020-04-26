@@ -19,6 +19,7 @@ https://themoviedb-brunogarcia.now.sh
 * [Vercel](https://vercel.com/)
 * [Travis](https://travis-ci.org/brunogarcia/themoviedb)
 * [The Movie DB](https://www.themoviedb.org/documentation/api)
+* [Cypress](https://dashboard.cypress.io/projects/adhj81/runs)
 
 ## Available Scripts
 
@@ -32,3 +33,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.
+
+### `npm e2e`
+
+Opens the Cypress Test Runner.

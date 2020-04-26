@@ -52,7 +52,10 @@ export default function Movie({ movie }) {
 
   return (
     <Col sm={12} lg={6}>
-      <div className="Movie-card">
+      <div
+        className="Movie-card"
+        data-cy="movie-item"
+      >
         <Row>
           <Col sm={12} md={4}>
             <Link to={`/details/${id}`}>

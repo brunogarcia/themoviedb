@@ -43,7 +43,10 @@ export default function SearchResults() {
   }
 
   return (
-    <ListGroup className="SearchResults-main">
+    <ListGroup
+      data-cy="search-results"
+      className="SearchResults-main"
+    >
       {movies.map((movie) => {
         const { id, title, release_date: releaseDate } = movie;
         const releaseDateNormalized = new Date(releaseDate).getFullYear();
