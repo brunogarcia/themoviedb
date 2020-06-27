@@ -4,6 +4,8 @@ import api from '../../api/index';
 import Error from '../../components/Error';
 import Loading from '../../components/Loading';
 import DetailsComponent from '../../components/Details';
+import SimilarMovies from '../../components/SimilarMovies';
+
 
 /**
  * Container for display the details of a movie
@@ -15,13 +17,22 @@ export default function Details() {
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(false);
   const [movie, setMovie] = React.useState({});
+  const [similarMovies, setSimilarMovies] = React.useState([]);
 
   React.useEffect(() => {
     setLoading(true);
 
-    api.getMovie(id)
+    const list = [
+      api.getMovie(id),
+      api.getSimilarMovies(id),
+    ];
+
+    Promise.all(list)
       .then((data) => {
-        setMovie(data);
+        const [movieData, similarMoviesData] = data;
+
+        setMovie(movieData);
+        setSimilarMovies(similarMoviesData.results);
       })
       .catch(() => {
         setError(true);
@@ -40,6 +51,13 @@ export default function Details() {
   }
 
   return (
-    <DetailsComponent movie={movie} />
+    <>
+      <DetailsComponent
+        movie={movie}
+      />
+      <SimilarMovies
+        movies={similarMovies}
+      />
+    </>
   );
 }

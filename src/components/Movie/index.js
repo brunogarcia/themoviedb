@@ -8,24 +8,11 @@ import Types from '../../utils/types';
 import CONSTANTS from '../../utils/constants';
 import getLabel from '../../utils/getLabel';
 import getDateNormalized from '../../utils/getDateNormalized';
+import getOverviewSmaller from '../../utils/getOverviewSmaller';
+
 import './styles.css';
 
 const { SIZE } = CONSTANTS.IMAGE;
-
-/**
- * Get the movie overview smaller
- *
- * @param {string} overview - The movie overview
- * @returns {string} - The movie overview smaller
- */
-function getOverviewSmaller(overview) {
-  const MAX_OVERVIEW_WORDS = 35;
-
-  return overview
-    .split(' ')
-    .splice(0, MAX_OVERVIEW_WORDS)
-    .join(' ');
-}
 
 /**
  * Component for display the movie

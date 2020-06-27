@@ -9,10 +9,11 @@ export default {
     HOST: 'https://api.themoviedb.org/3',
     // TODO: move this key to .env file
     KEY: '2fc1c5cdbc3e418d12cc5110714a82eb',
-    PATH: {
-      POPULAR: 'movie/popular',
-      SEARCH: 'search/movie',
+    PATHS: {
+      POPULAR: 'popular',
+      SEARCH: 'search',
       MOVIE: 'movie',
+      SIMILAR: 'similar',
     },
   },
   SEARCH: {

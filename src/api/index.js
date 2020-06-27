@@ -1,8 +1,13 @@
 import CONSTANTS from '../utils/constants';
 
-const { HOST, KEY, PATH } = CONSTANTS.API;
+const { HOST, KEY, PATHS } = CONSTANTS.API;
 
-const { POPULAR, MOVIE, SEARCH } = PATH;
+const {
+  POPULAR,
+  MOVIE,
+  SEARCH,
+  SIMILAR,
+} = PATHS;
 
 /**
  * Process the API response
@@ -19,18 +24,29 @@ function processResponse(res) {
 }
 
 /**
- * Get action
+ * Get request info
  *
- * @param {object} config - The config to process the request
+ * @param {object} config - The configuration to process the request
  * @param {string} config.path - The path to process the request
- * @param {string} config.subpath - The subpath to process the request
  * @param {string} config.params - The params to process the request
  * @returns {Promise} - The API response
  */
-async function get({ path, subpath = '', params = '' }) {
-  const config = `${HOST}/${path}${subpath}?api_key=${KEY}${params}`;
-  const req = new Request(config);
-  return fetch(req).then((res) => processResponse(res));
+function getRequestInfo({ path, params = '' }) {
+  const config = `${HOST}/${path}?api_key=${KEY}${params}`;
+  return new Request(config);
+}
+
+/**
+ * Get action
+ *
+ * @param {object} config - The configuration to process the request
+ * @returns {Promise} - The API response
+ */
+async function get(config) {
+  const requestInfo = getRequestInfo(config);
+
+  return fetch(requestInfo)
+    .then((response) => processResponse(response));
 }
 
 /**
@@ -40,7 +56,7 @@ async function get({ path, subpath = '', params = '' }) {
  */
 function getPopularMovies() {
   const config = {
-    path: POPULAR,
+    path: `${MOVIE}/${POPULAR}`,
   };
 
   return get(config);
@@ -54,22 +70,35 @@ function getPopularMovies() {
  */
 function getMovie(id) {
   const config = {
-    path: MOVIE,
-    subpath: `/${id}`,
+    path: `${MOVIE}/${id}`,
   };
 
   return get(config);
 }
 
 /**
- * Get popular movies
+ * Get similar movies
+ *
+ * @param {string} id - The movie id
+ * @returns {Promise} - The API response
+ */
+function getSimilarMovies(id) {
+  const config = {
+    path: `${MOVIE}/${id}/${SIMILAR}`,
+  };
+
+  return get(config);
+}
+
+/**
+ * Search movie
  *
  * @param {string} query - The query to request
  * @returns {Promise} - The API response
  */
 function search(query) {
   const config = {
-    path: SEARCH,
+    path: `${SEARCH}/${MOVIE}`,
     params: `&query=${query}&page=1&include_adult=false`,
   };
 
@@ -79,5 +108,6 @@ function search(query) {
 export default {
   getPopularMovies,
   getMovie,
+  getSimilarMovies,
   search,
 };

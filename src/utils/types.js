@@ -3,6 +3,7 @@ import {
   number,
   string,
   array,
+  arrayOf,
 } from 'prop-types';
 
 const movie = shape({
@@ -16,4 +17,9 @@ const movie = shape({
   genres: array,
 });
 
-export default { movie };
+const movies = arrayOf(movie);
+
+export default {
+  movie,
+  movies,
+};
