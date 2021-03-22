@@ -5,15 +5,12 @@
   "proxy": "https://api.themoviedb.org/3",
   "scripts": {
     "start": "react-scripts start",
-    "now-start": "serve --single ./build",
     "build": "react-scripts build",
     "lint": "eslint src/**/*.js",
     "test": "react-scripts test",
     "test:ci": "CI=true react-scripts test",
     "e2e": "cypress open",
-    "cypress": "cypress run --record --key f64ab05f-e93d-4577-a336-2a3d5c3c8bec",
-    "deploy": "now --public -e NODE_ENV=production --token $NOW_TOKEN --npm",
-    "alias": "now --public alias --token=$NOW_TOKEN"
+    "cypress": "cypress run --record --key f64ab05f-e93d-4577-a336-2a3d5c3c8bec"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.5.0",
@@ -43,18 +40,13 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^3.0.0",
     "eslint-plugin-testing-library": "^3.0.4",
-    "husky": "^4.2.5",
-    "now": "^18.0.0"
+    "husky": "^4.2.5"
   },
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint",
       "pre-push": "npm run test:ci"
     }
-  },
-  "now": {
-    "name": "themoviedb",
-    "alias": "themoviedb-brunogarcia"
   },
   "browserslist": {
     "production": [
