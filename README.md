@@ -1,12 +1,10 @@
 # The Movie DB
 
-[![Build Status](https://travis-ci.org/brunogarcia/themoviedb.svg?branch=master)](https://travis-ci.org/brunogarcia/themoviedb)
-
 A technical task developed with React, Bootstrap and the API of [The Movie DB](https://www.themoviedb.org/documentation/api)
 
 ## See in action
 
-https://themoviedb-brunogarcia.now.sh
+[https://react-the-movie-db.netlify.app](https://react-the-movie-db.netlify.app)
 
 ## Dependencies
 * [React](https://reactjs.org)
@@ -16,10 +14,9 @@ https://themoviedb-brunogarcia.now.sh
 
 ## Services
 
-* [Vercel](https://vercel.com/)
-* [Travis](https://travis-ci.org/brunogarcia/themoviedb)
 * [The Movie DB](https://www.themoviedb.org/documentation/api)
 * [Cypress](https://dashboard.cypress.io/projects/adhj81/runs)
+* [Netlify](https://www.netlify.com)
 
 ## Available Scripts
 
