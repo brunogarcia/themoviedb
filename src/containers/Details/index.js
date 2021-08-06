@@ -6,7 +6,6 @@ import Loading from '../../components/Loading';
 import DetailsComponent from '../../components/Details';
 import SimilarMovies from '../../components/SimilarMovies';
 
-
 /**
  * Container for display the details of a movie
  *

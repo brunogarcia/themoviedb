@@ -35,7 +35,7 @@ test('renders a badge with the vote average', () => {
   const badge = getByText('6');
 
   expect(badge).toBeInTheDocument();
-  expect(badge.className).toBe('badge badge-warning');
+  expect(badge.className).toBe('bg-warning badge badge-pill');
 });
 
 test('renders the title of the movie', () => {

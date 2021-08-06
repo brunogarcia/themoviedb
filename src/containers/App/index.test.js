@@ -2,6 +2,8 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import App from './index';
 
+window.scrollTo = jest.fn();
+
 test('renders header message', () => {
   const { getByAltText } = render(<App />);
   const headerMessage = getByAltText(/The Movie DB/i);

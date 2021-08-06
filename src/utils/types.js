@@ -2,9 +2,13 @@ import {
   shape,
   number,
   string,
-  array,
   arrayOf,
 } from 'prop-types';
+
+const genre = shape({
+  id: number.isRequired,
+  name: string.isRequired,
+});
 
 const movie = shape({
   id: number.isRequired,
@@ -14,7 +18,7 @@ const movie = shape({
   poster_path: string,
   release_date: string.isRequired,
   homepage: string,
-  genres: array,
+  genres: arrayOf(genre),
 });
 
 const movies = arrayOf(movie);

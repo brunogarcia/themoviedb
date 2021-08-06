@@ -6,9 +6,9 @@ import {
   Col,
   Badge,
 } from 'react-bootstrap';
+import Vote from '../Vote';
 import Image from '../Image';
 import CONSTANTS from '../../utils/constants';
-import getLabel from '../../utils/getLabel';
 import Types from '../../utils/types';
 import './styles.css';
 
@@ -34,8 +34,6 @@ function renderImage(title, posterPath) {
  * @returns {Container} - the container with the title
  */
 function renderTitle(title, releaseDate, voteAverage) {
-  const voteAverageNormalized = Math.floor(voteAverage);
-  const label = getLabel(voteAverageNormalized);
   const releaseYear = new Date(releaseDate).getFullYear();
 
   return (
@@ -43,9 +41,7 @@ function renderTitle(title, releaseDate, voteAverage) {
       <Row>
         <Col xs={2}>
           <p className="h1">
-            <Badge variant={label}>
-              {voteAverage}
-            </Badge>
+            <Vote vote={voteAverage} />
           </p>
         </Col>
         <Col>
@@ -95,8 +91,8 @@ function renderGenres(genres) {
             return (
               <Badge
                 key={id}
-                variant="dark"
-                className="Details-genre"
+                pill
+                className="Details-genre bg-dark"
               >
                 {name}
               </Badge>

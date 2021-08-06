@@ -24,11 +24,13 @@ const badChoice = {
  * @returns {object|null} -The recommendation data
  */
 function getRecommendation(vote) {
-  if (vote >= VOTE_GOOD) {
+  const voteAverageNormalized = Math.floor(vote);
+
+  if (voteAverageNormalized >= VOTE_GOOD) {
     return goodChoice;
   }
 
-  if (vote <= VOTE_BAD) {
+  if (voteAverageNormalized <= VOTE_BAD) {
     return badChoice;
   }
 

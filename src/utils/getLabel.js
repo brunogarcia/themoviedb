@@ -19,5 +19,5 @@ export default function getLabel(vote) {
     label = 'success';
   }
 
-  return label;
+  return `bg-${label}`;
 }

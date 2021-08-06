@@ -1,14 +1,10 @@
 import React from 'react';
-import {
-  Row,
-  Col,
-  Badge,
-} from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Vote from '../Vote';
 import Image from '../Image';
 import Types from '../../utils/types';
 import CONSTANTS from '../../utils/constants';
-import getLabel from '../../utils/getLabel';
 import getOverviewSmaller from '../../utils/getOverviewSmaller';
 import './styles.css';
 
@@ -30,10 +26,6 @@ export default function SimilarMovie({ movie }) {
     vote_average: voteAverage,
   } = movie;
 
-  const voteAverageNormalized = Math.floor(voteAverage);
-
-  const label = getLabel(voteAverageNormalized);
-
   return (
     <Col
       sm={12}
@@ -49,10 +41,8 @@ export default function SimilarMovie({ movie }) {
         <Col sm={12} md={8}>
           <div className="SimilarMovie-body">
             <Row>
-              <Col xs={1}>
-                <Badge variant={label}>
-                  {voteAverage}
-                </Badge>
+              <Col xs={2}>
+                <Vote vote={voteAverage} />
               </Col>
               <Col xs={10}>
                 <Link to={`/details/${id}`}>
