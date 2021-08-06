@@ -5,6 +5,7 @@ import Details from '../Details';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import CONSTANTS from '../../utils/constants';
+import ScrollToTop from '../../utils/scrollToTop';
 import './styles.css';
 
 const { PATH } = CONSTANTS.APP;
@@ -17,6 +18,7 @@ const { PATH } = CONSTANTS.APP;
 export default function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="App">
         <Header />
         <Switch>

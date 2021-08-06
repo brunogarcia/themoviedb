@@ -8,7 +8,6 @@ import Types from '../../utils/types';
 import SimilarMovie from '../SimilarMovie';
 import './styles.css';
 
-
 /**
  * Component for display the similar movies
  *

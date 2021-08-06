@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaInfoCircle } from 'react-icons/fa';
-import { Row, Col, Badge } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
+import Vote from '../Vote';
 import Image from '../Image';
 import Recommendation from '../Recommendation';
 import Types from '../../utils/types';
 import CONSTANTS from '../../utils/constants';
-import getLabel from '../../utils/getLabel';
 import getDateNormalized from '../../utils/getDateNormalized';
 import getOverviewSmaller from '../../utils/getOverviewSmaller';
 
@@ -33,10 +33,6 @@ export default function Movie({ movie }) {
 
   const releaseDateNormalized = getDateNormalized(releaseDate);
 
-  const voteAverageNormalized = Math.floor(voteAverage);
-
-  const label = getLabel(voteAverageNormalized);
-
   return (
     <Col sm={12} lg={6}>
       <div
@@ -53,12 +49,8 @@ export default function Movie({ movie }) {
           <Col sm={12} md={8}>
             <div className="Movie-body">
               <Row>
-                <Col xs={1}>
-                  <Badge
-                    variant={label}
-                  >
-                    {voteAverage}
-                  </Badge>
+                <Col xs={2}>
+                  <Vote vote={voteAverage} />
                 </Col>
                 <Col xs={10}>
                   <Link to={`/details/${id}`}>
@@ -85,7 +77,7 @@ export default function Movie({ movie }) {
                   </small>
                 </Link>
 
-                <Recommendation vote={voteAverageNormalized} />
+                <Recommendation vote={voteAverage} />
               </div>
             </div>
           </Col>
